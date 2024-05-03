@@ -7,7 +7,7 @@ function abrir() {
 		targets: '.symbol',
 		duration: 100,
 		easing: 'linear',
-		rotate: '180deg'
+		rotate: '180deg',
 	});
 
 	anime({
@@ -36,24 +36,24 @@ function fechar() {
         targets: '.menu',
         easing: 'linear',
         translateX: ['-100%', '0'], // Movendo o menu para fora da tela à esquerda
-        duration: 100
+        duration: 300
     });
 	anime({
 		targets: '.symbol',
-		duration: 100,
+		duration: 300,
 		easing: 'linear',
 		rotate: '0deg'
 	});
 	anime({
 		targets: '.top',
-		duration: 100,
+		duration: 300,
 		easing: 'linear',
 		opacity: 1
 	})
 	anime({
 		targets: '.bottom',
 		easing: 'linear',
-		duration: 100,
+		duration: 300,
 		opacity: 1
 	})
 
@@ -62,7 +62,7 @@ function fechar() {
 		easing: 'linear',
 		height: '3px',
     opacity: '100%',
-		duration: 100
+		duration: 300
 	});
     document.querySelector('.symbol').innerHTML = `<object onclick="menu()" class='hamburguer'>
     <object class="element top"></object>
@@ -83,7 +83,7 @@ function expandir(){
         height: '65px',
         borderRadius: '50px',
         translateX: ['0', '-90%'], // Expandir da direita para a esquerda
-        duration:100
+        duration:300
     });
 
     document.querySelector('.symbol').innerHTML = `<img onclick="menu()" id="botaoSair" style="width:20px; position:relative; bottom:22px;" src="./assets/botaoSairNav.png">`
@@ -98,7 +98,7 @@ function diminuir(){
 		height: '65px',
 		width: '65px',
 		borderRadius: '50px',
-		duration:100
+		duration:300
 	});
 }
 
