@@ -7,13 +7,48 @@
     <title>Educa Mais</title>
 
     <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="navBar" id="navBar">
-        
+        <div class="boxLogo">
+            <img src="./assets/Logo/educa.png">
+        </div>
+
+        <!-- Menu Hamburguer -->
+        <div class='menu'>
+			<ul class="lista">
+                <li>Home</li>
+                <li>Valores</li>
+                <li>Atividades</li>
+                <li>Sobre</li>
+                <li>Contato</li>
+			</ul>
+            <button onclick="telaLogin()" class="button type1">
+                <span class="btn-txt">Login</span>
+            </button>
+        </div>
+        <div class='symbol'>
+            <object onclick="menu()" class='hamburguer'>
+				<object class="element top"></object>
+				<object class="element mid"></object>
+				<object class="element bottom"></object>
+            </object>
+        </div>
     </div>
+
+    <main class="contentBox">
+
+    </main>
 
 </body>
 
 </html>
+
+
+
+<script src="./js/index.js"></script>

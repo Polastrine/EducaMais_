@@ -35,6 +35,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: opacidade 0.5s ease-in-out;
 }
 
 .boxLogo1 img{
@@ -119,6 +120,7 @@ body {
     display: flex;
     justify-content: center;
     transition: 1s;
+    animation: opacidade 1s ease-in-out;
 }
 
 .titleText1{
@@ -269,6 +271,17 @@ body {
     font-size: 12px;
     text-align: center;
     padding-right: 10px;
+}
+
+
+@keyframes opacidade{
+    0%{
+        opacity: 0%;
+    }
+
+    100%{
+        opacity: 100%;
+    }
 }
 
 

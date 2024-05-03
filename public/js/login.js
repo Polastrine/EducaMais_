@@ -99,3 +99,9 @@ function mudarTela2() {
     }, 300); // Tempo em milissegundos (300ms = 0.3 segundos)
 }
   
+
+
+
+function telaHome(){
+    window.location.href="./index.html"
+}
