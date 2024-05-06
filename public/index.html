@@ -22,9 +22,9 @@
         <!-- Menu Hamburguer -->
         <div class='menu'>
 			<ul class="lista">
-                <li>Home</li>
-                <li>Valores</li>
-                <li>Atividades</li>
+                <li onclick="scrollHome()">Home</li>
+                <li onclick="scrollPilares()">Pilares</li>
+                <li onclick="scrollHabilidades()">Habilidades</li>
                 <li>Sobre</li>
                 <li>Contato</li>
 			</ul>
@@ -41,17 +41,128 @@
         </div>
     </div>
 
-    <main class="contentBox">
-        <div class="textHome">A educação <br>
-            <b style="color: #FD0391; padding-left:50px;">salva vidas!</b></div>
-        <div class="detalhesHome">
-            <img src="./assets/detalhesHome.png">
+    <main>
+        <div id="home" class="contentBox">
+            <div class="textHome">A educação <br>
+                <b style="color: #FD0391; padding-left:50px;">salva vidas!</b></div>
+            <div class="detalhesHome">
+                <img src="./assets/detalhesHome.png">
+            </div>
+            <div class="conjuntoHome">
+                <img src="./assets/conjuntoHome.png">
+            </div>
         </div>
-        <div class="conjuntoHome">
-            <img src="./assets/conjuntoHome.png">
-        </div>
-    </main>
 
+        <h1 id="pilares" class="textTitle1"> Pilares<b style="color: #FD0391; padding-left: 8px;">da Educação</b></h1>
+        
+        <div class="cards">
+            <section class="section1">
+                <div class="card1">
+                    <div class="cardLogo1">
+                        <img src="./assets/logoCard1.png">
+                        <h3> O Valor da Educação </h3>
+                    </div>
+                    <div class="textCard1">
+                        <p><b>Valor imensurável</b>, proporcionando conhecimento e habilidades práticas, promovendo o desenvolvimento pessoal.</p>
+                    </div>
+                </div>
+                <div class="imgCards">
+                    <img src="./assets/fotoCard1.png">
+                </div>
+            </section>
+            <section class="section2">
+                <div class="card2">
+                    <div class="cardLogo2">
+                        <img src="./assets/logoCard2.png">
+                        <h3> Consequências da Educação </h3>
+                    </div>
+                    <div class="textCard2">
+                        <p>A educação é responsável por impactar toda a sociedade, portanto, investimos no <b>progresso, autonomia e disciplina.</b></p>
+                    </div>
+                </div>
+                <div class="imgCards">
+                    <img src="./assets/fotoCard2.png">
+                </div>
+            </section>
+            <section class="section3">
+                <div class="card3">
+                    <div class="cardLogo3">
+                        <img src="./assets/logoCard3.png">
+                        <h3> Acesso à Educação </h3>
+                    </div>
+                    <div class="textCard3">
+                        <p>Todos merecem <b>acesso</b> a uma <b>educação de qualidade</b>, garantindo que todos tenham alcance, enriquecendo as suas vidas.</p>
+                    </div>
+                </div>
+                <div class="imgCards">
+                    <img src="./assets/fotoCard3.png">
+                </div>
+            </section>
+            <section class="section4">
+                <div class="card4">
+                    <div class="cardLogo4">
+                        <img src="./assets/logoCard4.png">
+                        <h3> Inovação na Educação </h3>
+                    </div>
+                    <div class="textCard4">
+                        <p>A educação está em <b>constante evolução</b>, sendo impulsionada, agora, pela <b>tecnologia.</b></p>
+                    </div>
+                </div>
+                <div class="imgCards">
+                    <img src="./assets/fotoCard4.png">
+                </div>
+            </section>
+        </div>
+
+        <div class="estaticsBox">
+            <section class="estatics1">
+                <h1 class="estaticsTitle">5k+</h1>
+                <h3 class="estaticsText">Atividades Feitas</h3>
+            </section>
+            <section class="estatics1">
+                <h1 class="estaticsTitle">5+</h1>
+                <h3 class="estaticsText">Aprovações em Concursos/Vestibulares</h3>
+            </section>
+            <section class="estatics1">
+                <h1 class="estaticsTitle">~20k+</h1>
+                <h3 class="estaticsText">Horas de Estudo</h3>
+            </section>
+            <section class="estatics1">
+                <h1 class="estaticsTitle">3</h1>
+                <h3 class="estaticsText">Anos em contato com a tecnologia</h3>
+            </section> 
+        </div>
+
+        <h1 id="habilidades" class="textTitle2"> Habilidades <b style="color: #FD0391; padding-left: 8px;">Desenvolvidas</b></h1>
+
+        <div class="habilidades">
+            <section class="section1">
+                <div class="imgSecao1">
+                    <img src="./assets/imgSecao1.png">
+                </div>
+                <div class="textSecao1">
+                    <p class="titleSecao1">Utilização <br><b>de Arduinos</b></p>
+                    <span class="infoBoxSecao1">
+                        <p class="infoSecao1">Durante o 1° semestre do curso de Análise e Desenvolvimento de Sistemas na faculdade <b>São Paulo Tech School</b>, na disciplina de Arquitetura Computacional, desenvolvemos a capacidade de manusear o Arduino UNO, que é uma placa microcontroladora de código aberto para a utilização de sensores que podem capturar a temperatura, umidade e a luminosidade de um ambiente e a sensibilidade ao toque.<br><br>
+                            Placa utilizada em diversos projetos eletrônicos, IoT, automação, robótica, entre outros.
+                        <br><br>
+                            A habilidade de utilizar o Arduino UNO não apenas ampliou nosso conhecimento técnico, mas também nos capacitou a enfrentar <b>problemas do mundo real</b> com criatividade e eficácia.</p>
+                    </span>
+                </div>
+            </section>
+            <section class="section2">
+
+            </section>
+            <section class="section3">
+
+            </section>
+            <section class="section4">
+
+            </section>
+        </div>
+
+
+    </main>
 </body>
 
 </html>

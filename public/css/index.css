@@ -8,12 +8,15 @@ body{
     background-image: url(../assets/fundoMain/Dark/Dark\ 01.png);
     background-size: cover;
     height: 7130px;
+    max-width: 100%;
+    overflow-x: hidden;
+    
 }
 
 .navBar{
     width: 100vw;
     height: 170px;
-    position: relative;
+    position: fixed;
     z-index: 20;
 }
 
@@ -150,7 +153,6 @@ li:hover{
   
   .button:hover {
     box-shadow: 1px 1px 200px #252525;
-    color: #fff;
     border: none;
     background-color: #ffffff;
     color: #FD0391;
@@ -167,6 +169,8 @@ li:hover{
     z-index: 0;
     width: 100vw;
     display: flex;
+    top: 180px;
+    height: 1100px;
 }
 
 .detalhesHome{
@@ -242,3 +246,186 @@ li:hover{
         transform: scale(100%);
     }
 }
+
+
+.cards{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+    padding-bottom: 100px;
+}
+
+.cards .section1,.cards .section2,.cards .section3,.cards .section4{
+    height: 600px;
+    width: 328px;
+}
+
+.cards .section1 .card1{
+    width: 328px;
+    height: 218px;
+    border-radius: 30px;
+    background: linear-gradient(#e66465, #9198e5);
+    position: absolute;
+    z-index: 2;
+}
+
+.cards .section2 .card2{
+    width: 328px;
+    height: 218px;
+    border-radius: 30px;
+    background: linear-gradient(#7178c3, #ad7cb0);
+    position: absolute;
+    z-index: 2;
+}
+
+.cards .section3 .card3{
+    width: 328px;
+    height: 218px;
+    border-radius: 30px;
+    background: linear-gradient(#e66465, #9198e5);
+    position: absolute;
+    z-index: 2;
+}
+
+.cards .section4 .card4{
+    width: 328px;
+    height: 218px;
+    border-radius: 30px;
+    background: linear-gradient(#7178c3, #ad7cb0);
+    position: absolute;
+    z-index: 2;
+}
+
+.cardLogo1,.cardLogo2,.cardLogo3,.cardLogo4{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 10px 5px 5px;
+}
+
+.cardLogo1 h3,.cardLogo2 h3,.cardLogo3 h3,.cardLogo4 h3{
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.275);
+    color: #FFFFFF; 
+    font-weight: bold;
+}
+
+
+.cardLogo1 img,.cardLogo2 img,.cardLogo4 img{
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.cardLogo3 img{
+    padding-left: 10px;
+    padding-right: 35px;
+}
+
+.textCard1,.textCard2{
+    color: #FFFFFF;
+    line-height: 25px;
+    text-align: center;
+    padding: 5px 10px 0;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.275);
+}
+
+.textCard3{
+    color: #FFFFFF;
+    line-height: 25px;
+    text-align: center;
+    padding: 12px 10px 0;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.275);
+}
+
+.textCard4{
+    color: #FFFFFF;
+    line-height: 25px;
+    text-align: center;
+    padding: 22px 10px 0;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.275);
+}
+
+.imgCards{
+    position: relative;
+    z-index: 1;
+    right: 8px;
+    top: 150px;
+}
+
+.textTitle1{
+    color: #FFFFFF;
+    background-color: #232323;
+    border-radius: 50px;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 80px;
+    margin-bottom: 80px;
+    margin-top: 100px;
+}
+
+
+.estaticsBox{
+    width: 100vw;
+    position: relative;
+    bottom: 50px;
+    left: 38px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    gap: 170px;
+    justify-content: center;
+}
+
+.estaticsTitle{
+    color: #FFFFFF;
+    font-size: 60px;
+    justify-content: center;
+}
+
+.estaticsText{
+    color: #FFFFFF;
+    justify-content: center;
+}
+
+.textTitle2{
+    color: #FFFFFF;
+    background-color: #232323;
+    border-radius: 50px;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 80px;
+    margin-top: 140px;
+}
+
+.titleSecao1{
+    color: #FFFFFF;
+    margin-top: 130px;
+    margin-left: 180px;
+    font-size: 65px;
+}
+
+.section1{
+    display: flex;
+}
+
+.infoSecao1{
+    background-color: rgba(255, 255, 255, 0.297);
+    border-radius: 50px;
+    width: 800px;
+    margin-left: 150px;
+    margin-top: 80px;
+    padding: 30px;
+    font-size: 20px;
+    color: #FFFFFF;
+    
+}
+

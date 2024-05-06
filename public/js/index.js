@@ -117,3 +117,27 @@ function menu(){
 function telaLogin(){
     window.location.href="./login.html"
 }
+
+
+
+
+function scrollHome(){
+	const telaCards = document.getElementById('home');
+
+	telaCards.scrollIntoView({behavior: "smooth"})
+	menu()
+}
+
+function scrollPilares(){
+	const telaCards = document.getElementById('pilares');
+
+	telaCards.scrollIntoView({behavior: "smooth"})
+	menu()
+}
+
+function scrollHabilidades(){
+	const telaCards = document.getElementById('habilidades');
+
+	telaCards.scrollIntoView({behavior: "smooth"})
+	menu()
+}
