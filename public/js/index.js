@@ -141,3 +141,28 @@ function scrollHabilidades(){
 	telaCards.scrollIntoView({behavior: "smooth"})
 	menu()
 }
+
+function scrollCuriosidades(){
+	const telaCards = document.getElementById('exploracao');
+
+	telaCards.scrollIntoView({behavior: "smooth"})
+	menu()
+}
+
+
+let i = 1;
+document.getElementById('radio1').checked = true;
+
+setInterval( function(){
+	nextImage();
+}, 8000)
+
+function nextImage(){
+	i++;
+	if(i>3){
+		i=1;
+	}
+
+	document.getElementById('radio'+i).checked = true;
+}
+

@@ -25,7 +25,7 @@
                 <li onclick="scrollHome()">Home</li>
                 <li onclick="scrollPilares()">Pilares</li>
                 <li onclick="scrollHabilidades()">Habilidades</li>
-                <li>Sobre</li>
+                <li onclick="scrollCuriosidades()">Curiosidades</li>
                 <li>Contato</li>
 			</ul>
             <button onclick="telaLogin()" class="button type1">
@@ -151,18 +151,119 @@
                 </div>
             </section>
             <section class="section2">
-
+                <div class="textSecao2">
+                    <p class="titleSecao2"><span style="padding-left: 55px;">Manutenção</span> <br><b>de Aeronaves</b></p>
+                    <span class="infoBoxSecao2">
+                        <p class="infoSecao2"> No início de 2023, ingressei na <b>Escola de Especialistas da Aeronáutica (EEAR)</b>, onde iniciei o curso de <b>BMA (Básico de Mecânica de Aeronaves)</b>, e me interessei pela automação, eletrônica analógica, digital e a física aplicada à área.
+                            <br><br>
+                            Aprendi muito sobre teoria de voo e o básico da manutenção de uma aeronave, seu motor, paineis, sistema hidráulico, e afins.
+                            <br><br>
+                            Grande motivação para o meu objetivo de aliar a programação à áreas mais físicas e manuais, trazendo facilidade a nossa realidade.
+                    </span>
+                </div>
+                <div class="imgSecao2">
+                    <img src="./assets/imgSecao2.png">
+                </div>
             </section>
             <section class="section3">
-
+                <div class="imgSecao3">
+                    <img src="./assets/imgSecao3.png">
+                </div>
+                <div class="textSecao3">
+                    <p class="titleSecao3">Desenvolvimento<br><b>de Lógica</b> &<br><span style="padding-left: 300px;">Conhecimento</span><br><b><span style="padding-left: 510px;">Teórico</span></b></p>
+                    <span class="infoBoxSecao3">
+                        <p class="infoSecao3">Durante todo o período de estudo, claro, eu aprendi e absorvi muitas coisas novas, isso é, <b>habilidades</b> e <b>técnicas de estudo</b> e <b>socioemocionais</b>, conhecimento teórico (física, matemática, química, ...) e com a mente mais aberta, aprendi a ser criativo e contruir uma lógica melhor para cada etapa e desafios.
+                    </span>
+                </div>
             </section>
             <section class="section4">
-
+                <div class="textSecao4">
+                    <p class="titleSecao4"><span style="padding-left: 245px;">A arte</span><br><b>de programar</b></p>
+                    <span class="infoBoxSecao4">
+                        <p class="infoSecao4"> Após sair da Força Aérea Brasileira, <b>o meu interesse por programação havia aumentado</b>, o que me incentivou a entrar na SPTech e hoje ter o prazer de aprender todos dias, cada vez mais, sobre o mundo da programação.
+                        <br><br>
+                        Iniciei com as linguagens HTML, CSS e JS, porém o meu foco é trabalhar com as linguagens envolvidas em projetos de <b>sistemas embarcados, automação de sistemas, IoT, Machine Learning,</b> tais como C++, C# e Phyton. 
+                    </span>
+                </div>
+                <div class="imgSecao4">
+                    <img src="./assets/imgSecao4.png">
+                </div>
             </section>
         </div>
 
+        <h1 id="exploracao" class="textTitle4"> Exploração <b style="color: #FD0391; padding-left: 8px;">de Conhecimento</b></h1>
 
+        <div class="exploracao">
+            <div class="msgFinal">
+                <p>Agora, depois ver o que me traz felicidade e muito orgulho de mim mesmo, eu te pergunto, do que <b>VOCÊ</b> gosta?</p>
+                <br>
+                <p>Ou, o que você gostaria de aprender? Até mesmo uma <b>pequena curiosidade</b> pode ser uma fração de conhecimento enorme.</p>
+            </div>
+            <section class="secaoCuriosidade">
+                <div class="slides">
+                    <!-- Radio Buttons -->
+                    <input type="radio" name="radio-btn" id="radio1">
+                    <input type="radio" name="radio-btn" id="radio2">
+                    <input type="radio" name="radio-btn" id="radio3">
+
+                    <!-- Slide Img's -->
+                    <div class="slide primeiro">
+                        <img src="./assets/t27.jpg">
+                        <div class="boxMsg1">
+                            <h3>Você sabia?</h3>
+                            <p> O avião de acrobacias brasileiro é o famoso <b>T-27 Tucano</b>, feito pela Embraer, empresa brasileira de aviação. O avião já foi utilizado pela força aérea Colômbiana,Chinesa e Inglesa.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./assets/unimate.jpg">
+                        <div class="boxMsg2">
+                            <h3>Você sabia?</h3>
+                            <p> O primeiro robô industrial foi chamado de <b>"Unimate"</b>. Foi criado em 1954 por <b>George Devol e Joseph Engelberger</b> para automatizar tarefas com o manuseio de materiais quentes e perigosos.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="./assets/einstein.jpg">
+                        <div class="boxMsg3">
+                            <h3>Você sabia?</h3>
+                            <p> Depois da morte de Albert Einstein, seu cérebro foi <b>removido</b> e <b>preservado</b> para estudo científico.</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Auto -->
+                    <div class="navAuto">
+                        <div class="btn1"></div>
+                        <div class="btn2"></div>
+                        <div class="btn3"></div>
+                    </div>
+                </div>
+
+                <div class="navManual">
+                    <label for="radio1" class="manualBtn"></label>
+                    <label for="radio2" class="manualBtn"></label>
+                    <label for="radio3" class="manualBtn"></label>
+                </div>
+            </section>
+        </div>
     </main>
+    <footer>
+        <div class="logoFooter">
+            <img src="./assets/logoFooter.png">
+        </div>
+        <div class="menuFooter">
+            <h3>Menu Rápido</h3>
+            <p onclick="scrollHome()">Home</p>
+            <p onclick="scrollPilares()">Pilares</p>
+            <p onclick="scrollHabilidades()">Habilidades</p>
+            <p onclick="">Curiosidades</p>
+            <p onclick="">Contato</p>
+        </div>
+        <div class="legalFooter">
+            <h3>Legal</h3>
+            <p>Condições Gerais</p>
+            <p>Política de Cookies</p>
+            <p>Imprensa</p>
+        </div>
+    </footer>
 </body>
 
 </html>
