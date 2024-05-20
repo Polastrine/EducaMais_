@@ -180,6 +180,8 @@ body {
     color: #FFFFFF;
     font-size: 16px;
     padding: 10px 0 0 10px;
+    resize: none; /* Disable manual resizing */
+    overflow: hidden; /* Hide scrollbars */
 }
 
 .enviarBtn {
@@ -237,4 +239,9 @@ body {
 .enviarBtn:hover span:not(:nth-child(6)) {
     transform: translate(-50%, -50%) scale(4);
     transition: 1.5s ease;
+}
+
+.enviarBtn:active{
+    scale: 1.2;
+    transition: .2s;
 }

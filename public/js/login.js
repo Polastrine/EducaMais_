@@ -105,3 +105,8 @@ function mudarTela2() {
 function telaHome(){
     window.location.href="./index.html"
 }
+
+
+
+
+// Validaçẽos do campo:

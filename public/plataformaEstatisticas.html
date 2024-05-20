@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <div class="boxes">
@@ -52,10 +53,46 @@
         </div>
 
         <div class="interfaceBox">
+            <div data-aos="zoom-in" data-aos-duration="1000" class="boxDados">
+                <h1>DADOS <b style="color: #393939;">GLOBAIS</b></h1>
+                <div class="firstLine">
+                    <div class="spanJogadores"> 
+                        <p> Jogadores Ativos: </p>
+                    </div>
+                    <div class="spanPublicacoes">
+                        <p> Qntd. Publicações: </p>
+                    </div>
+                    <div class="spanPontuacao">
+                        <p> Pontuação Global: </p>
+                    </div>
+                </div>
 
+                <div class="secondLine">
+                    
+                    <div class="spanJogosFeitos">
+                        <p> Jogos Feitos: </p>
+                    </div>
+                </div> 
+            </div>
+            <div data-aos="zoom-in" data-aos-duration="1000" class="boxAnalise">
+                <h1> ANÁLISES </h1>
+                <div class="boxDadosApurados">
+                    <div class="boxRanking">
+                        <h2> Ranking Global: </h2>
+                        <div class="ranks"></div>
+                    </div>
+                    <div class="boxGraficos">
+                        <div class="boxGrafico1"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
 </html>
 
-<script src="./js/plataformaHome.js"></script>
+<script src="./js/plataformaEstatisticas.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>

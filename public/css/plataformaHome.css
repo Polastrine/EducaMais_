@@ -417,6 +417,10 @@ body {
     transition: 1.5s ease;
 }
     
+.btnSalvar:active{
+    scale: 1.2;
+    transition: .3s;
+}
 
 
 

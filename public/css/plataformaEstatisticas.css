@@ -162,5 +162,159 @@ body {
     padding-bottom: 300px;
 }
 
+.boxDados {
+    height: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+.boxDados h1 {
+    color: #FFFFFF;
+    padding-top: 25px;
+    font-size: 28px;
+}
+
+.firstLine {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin: 30px 60px 0;
+}
+
+.spanJogadores {
+    width: 280px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.spanJogadores p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanPublicacoes {
+    width: 290px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+
+.spanPublicacoes p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanPontuacao {
+    width: 360px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+
+.spanPontuacao p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.secondLine {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin: 10px 60px 0;
+}
+
+
+.spanJogosFeitos {
+    width: 230px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.spanJogosFeitos p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+
+.boxAnalise {
+    height: 960px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 60px;
+}
+
+.boxAnalise h1 {
+    color: #FFFFFF;
+    padding-top: 25px;
+    font-size: 28px;
+}
+
+.boxDadosApurados {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 480px;
+}
+
+.boxRanking {
+    margin: 30px 0 0 60px;
+    padding-top: 5px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 300px;
+    height: 450px;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    resize: none; /* Disable manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+}   
+
+.ranks{
+    margin: 5px 5px 0;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 283px;
+    height: 390px;
+    border-radius: 10px;
+}
+
+.boxGraficos {
+    margin: 30px 0 0 30px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 655px;
+    height: 450px;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    resize: none; /* Disable manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+}   
 
 

@@ -16,4 +16,7 @@ function acessarEstatisticas(){
 
 function voltarHome(){
     window.location.href='./index.html'
+    setTimeout(() => {
+        window.history.replaceState(null, null, './index.html');
+    }, 0);
 }
