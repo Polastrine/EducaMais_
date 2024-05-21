@@ -1,59 +1,67 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+-- Arquivo base do script feito no MySQL e quais foram as entidades criadas:
 
-/*
-comandos para mysql server
-*/
+CREATE DATABASE educaMais;
 
-CREATE DATABASE aquatech;
-
-USE aquatech;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14)
-);
+USE educaMais;
 
 CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    senha CHAR(15) NOT NULL,
+    dataCriacao TIMESTAMP,
+    jogosFeitos INT DEFAULT 0,
+    pontuacaoTotal INT DEFAULT 0
 );
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+CREATE TABLE anotacao (
+	idAnotacao INT PRIMARY KEY AUTO_INCREMENT,
+    anotacao VARCHAR(280),
+    fkUsuario INT,
+    CONSTRAINT chkAnotacaoUsuario FOREIGN KEY (fkUsuario)
+		REFERENCES usuario(idUsuario)
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+CREATE TABLE publicacao (
+	idPublicao INT PRIMARY KEY AUTO_INCREMENT,
+    publicacao VARCHAR(280),
+    fkUsuario INT,
+    CONSTRAINT chkPublicacaoUsuario FOREIGN KEY (fkUsuario)
+		REFERENCES usuario(idUsuario)
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
-
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+CREATE TABLE resultado (
+	idResultado INT PRIMARY KEY AUTO_INCREMENT,
+    pontuacao INT,
+    fkUsuario INT,
+    CONSTRAINT chkResultadoUsuario FOREIGN KEY (fkUsuario)
+		REFERENCES usuario(idUsuario)
 );
 
-insert into empresa (razao_social, cnpj) values ('Empresa 1', '00000000000000');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
+CREATE TABLE pergunta (
+	idPergunta INT PRIMARY KEY AUTO_INCREMENT,
+	textoPergunta VARCHAR(100)
+);
+
+CREATE TABLE alternativa (
+	idAlternativa INT PRIMARY KEY AUTO_INCREMENT,
+    textoAlternativa VARCHAR(25),
+    correta BOOLEAN,
+    fkPergunta INT,
+    CONSTRAINT chkAlternativaPergunta FOREIGN KEY (fkPergunta)
+		REFERENCES pergunta(idPergunta)
+);
+
+CREATE TABLE resposta (
+	idResposta INT PRIMARY KEY AUTO_INCREMENT,
+    resposta VARCHAR(25),
+    fkPergunta INT,
+    fkAlternativa INT,
+    fkUsuario INT,
+    CONSTRAINT chkRespostaPergunta FOREIGN KEY (fkPergunta)
+		REFERENCES pergunta(idPergunta),
+    CONSTRAINT chkRespostaAlternativa FOREIGN KEY (fkAlternativa)
+		REFERENCES alternativa(idAlternativa),
+    CONSTRAINT chkRespostaUsuario FOREIGN KEY (fkUsuario)
+		REFERENCES usuario(idUsuario)
+);
