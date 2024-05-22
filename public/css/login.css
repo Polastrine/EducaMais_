@@ -151,12 +151,20 @@ body {
 
 /*Inputs*/
 
-.input-group {
+    .input-group {
     position: relative;
    }
    
-   .input {
+   #inputNome1,#inputEmail1,#inputEmail2,#inputSenha1,#inputSenha2,#inputSenha3{
     border: solid 2px #9e9e9e;
+   }
+
+   #inputNome1:focus,#inputEmail1:focus,#inputEmail2:focus,#inputSenha1:focus,#inputSenha2:focus,#inputSenha3:focus{
+    outline: none;
+    border: 2px solid #EE609C;
+   }
+
+   .input {
     border-radius: 50px;
     background: none;
     padding: 1rem;
@@ -175,10 +183,6 @@ body {
     transition: 150ms cubic-bezier(0.4,0,0.2,1);
    }
    
-   .input:focus, input:valid {
-    outline: none;
-    border: 2px solid #EE609C;
-   }
    
    .input:focus ~ label, input:valid ~ label {
     transform: translateY(-50%) scale(0.8);
@@ -284,34 +288,119 @@ body {
     }
 }
 
+/* Caixa de Alerta */
 
+.caixaAlertaPosition{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    transform: translateY(-100%);
+    transition: 1s;
+}
 
+.caixaAlerta{
+    margin: auto;
+    width: 320px;
+    height: 100px;
+    background-color: #f036c1;
+    border-radius: 0 0 20px 20px;
+}
 
+.caixaAlerta h1{
+    color: #FFFFFF;
+    padding: 8px 0 0 0;
+    text-align: center;
+}
 
+.caixaAlerta p{
+    color: #FFFFFF;
+    padding: 12px 0 0 0;
+    text-align: center;
+}
 
+.caixaAlerta img{
+    display: flex;
+    position: absolute;
+    right: 805px;
+    top: 2px;
+    width: 25px;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.caixaAlerta img:hover{
+    opacity: 80%;
+    scale: 1.1;
+}
 
 .boxCinza, .boxRosa{
     transition: transform 0.8 ease;
 }
 
+
+/* Caixa de Cadastro Efetuado */
+
+.caixaCadastroPosition{
+    display: none;
+    opacity: 0%;
+    position: absolute;
+    opacity: 0%;
+    z-index: 5;
+    width: 100%;
+    bottom: 450px;
+    transition: 1s;
+}
+
+.caixaCadastroEfetuado{
+    margin: auto;
+    width: 400px;
+    height: 200px;
+    background-color: #f036c1;
+    border-radius: 20px;
+    border: 5px solid #700a57;
+}
+
+.caixaCadastroEfetuado h1{
+    text-align: center;
+    color: #FFFFFF;
+    padding-top: 10px;
+}
+
+.caixaCadastroEfetuado p{
+    text-align: center;
+    color: #FFFFFF;
+    padding-top: 10px;
+}
+
+.caixaCadastroEfetuado img {
+    width: 80px;
+    position: relative;
+    bottom: 15px;
+}
+
+.caixaCadastroEfetuado .botaoFecharCadastro {
+    width: 20px;
+    position: absolute;
+    top: 10px;
+    right: 765px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.caixaCadastroEfetuado .botaoFecharCadastro:hover{
+    opacity: 80%;
+    scale: 1.1;
+}
+
+.boxDesfoque{
+    position: absolute;
+    display: none;
+    opacity: 0%;
+    z-index: 4;
+    opacity: 0%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); /* Aplicar desfoque */
+    width: 100vw;
+    height: 100vh;
+    transition: 1s;
+}

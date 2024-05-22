@@ -15,6 +15,28 @@
 
 <body>
 
+    <div class="boxDesfoque">
+    </div>
+
+    <div class="caixaAlertaPosition">
+        <div class="caixaAlerta">
+            <h1> Atenção!</h1>
+            <img onclick="fecharAviso()" src="./assets/botaoFechar.png">
+            <span class="boxMensagem"></span>
+        </div>
+    </div>
+
+    <div class="caixaCadastroPosition">
+        <div class="caixaCadastroEfetuado">
+            <img class="botaoFecharCadastro" onclick="fecharEfetuado()" src="./assets/botaoFechar.png">
+            <h1> Cadastro Efetuado!</h1>
+            <br>
+            <p> O cadastro do seu usuário foi feito <b>com sucesso!</b></p>
+            <p> Agora faça o login e tenha acesso a nossa <b>plataforma.</b></p>
+            <img src="./assets/einstein.png">
+        </div>
+    </div>
+
     <div class="boxesDiv">
 
         <div class="boxCinza">
@@ -75,6 +97,7 @@
                     </h2>
                 </div>
 
+
                 <div class="inputBox" id="inputBox">
                         <div class="input-group">
                         <input required="" type="text" name="text" autocomplete="off" class="input" id="inputNome1">
@@ -98,7 +121,7 @@
                         <label class="user-label">Confirme a senha</label>  
                       </div>
                       <br>
-                      <button>Cadastrar ></button>
+                      <button onclick="cadastrar()">Cadastrar ></button>
                 </div>
 
                 <p class="textCadastro2">Já possui uma conta? <b class="botaoCadastro" onclick="mudarTela2()">Faça o login</b></p>

@@ -109,4 +109,151 @@ function telaHome(){
 
 
 
-// Validaçẽos do campo:
+
+// Validações do campo:
+
+function cadastrar(){
+    let nomeCompleto = inputNome1.value;
+    let email = inputEmail2.value;
+    let senha = inputSenha2.value;
+    let senhaConfirmacao = inputSenha3.value;
+
+    
+    let nomeInput = document.getElementById('inputNome1');
+    let emailInput = document.getElementById('inputEmail2');
+    let senhaInput = document.getElementById('inputSenha2');
+    let senhaConfirmacaoInput = document.getElementById('inputSenha3');
+
+    if (nomeCompleto == ''|| email == '' || senha == '' || senhaConfirmacao == ''){
+        nomeInput.style.border = 'solid 2px #FF0000';
+        emailInput.style.border = 'solid 2px #FF0000';
+        senhaInput.style.border = 'solid 2px #FF0000';
+        senhaConfirmacaoInput.style.border = 'solid 2px #FF0000';
+        let mensagemAlerta = 'Preencha todos os campos!';
+        mostrarAlerta(mensagemAlerta)
+    } else if (email.indexOf('@') == -1 || email.indexOf('.') == -1){
+        emailInput.style.border = 'solid 2px #FF0000';
+        let mensagemAlerta = ' Insira um email válido!'
+        mostrarAlerta(mensagemAlerta)
+    } else {
+
+        let tamanhoSenha = senha.length;
+        let listaCaracteres = [
+            '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
+            ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~'
+        ];
+
+        if(tamanhoSenha < 6){
+            senhaInput.style.border = 'solid 2px #FF0000';
+            let mensagemAlerta = ' Sua senha deve ter no mínimo 6 caracteres'
+            mostrarAlerta(mensagemAlerta)
+        } else{
+            let temMaiusculo = false;
+            let temNumero = false;
+            let temCaractereEspecial = false;
+
+            for(let posicaoLetra = 0; posicaoLetra < tamanhoSenha; posicaoLetra++){
+                let letra = senha[posicaoLetra];
+
+                if (letra >= 'A' && letra <= 'Z') {
+                    temMaiusculo = true;
+                }
+
+                if (letra >= '0' && letra <= '9') {
+                    temNumero = true;
+                }
+
+                if (listaCaracteres.includes(letra)) {
+                    temCaractereEspecial = true;
+                }
+            }
+            if (!temMaiusculo) {
+                senhaInput.style.border = 'solid 2px #FF0000';
+                let mensagemAlerta = ' Sua senha deve ter pelo menos uma letra maiúscula';
+                mostrarAlerta(mensagemAlerta);
+            } else if (!temNumero) {
+                senhaInput.style.border = 'solid 2px #FF0000';
+                let mensagemAlerta = ' Sua senha deve ter pelo menos um número';
+                mostrarAlerta(mensagemAlerta);
+            } else if (!temCaractereEspecial) {
+                senhaInput.style.border = 'solid 2px #FF0000';
+                let mensagemAlerta = ' Sua senha deve ter pelo menos um caractere especial';
+                mostrarAlerta(mensagemAlerta);
+            } else if (senha !== senhaConfirmacao) {
+                senhaInput.style.border = 'solid 2px #FF0000';
+                senhaConfirmacaoInput.style.border = 'solid 2px #FF0000';
+                let mensagemAlerta = 'Confirmação de senha inválida!';
+                mostrarAlerta(mensagemAlerta);
+            } else {
+                mostrarCadastroEfetuado()
+                    fetch("/usuarios/cadastrar", {
+                        method: "POST",
+                        headers: {
+                        "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                        // crie um atributo que recebe o valor recuperado aqui
+                        // Agora vá para o arquivo routes/usuario.js
+                        nomeServer: nomeCompleto,
+                        emailServer: email,
+                        senhaServer: senha
+                        }),
+                    })
+                    .then(function (resposta) {
+                        console.log('Resposta:', resposta);
+
+                        if (resposta.ok){
+                            mostrarCadastroEfetuado()
+                        }
+                    })
+            }
+        }
+
+    }
+}
+
+
+function mostrarAlerta(mensagemAlerta){
+    let boxAlerta = document.querySelector('.caixaAlertaPosition');
+    let boxMensagem = document.querySelector('.boxMensagem')
+    boxAlerta.style.transform = 'translateY(0%)';
+    boxMensagem.innerHTML = `<p>${mensagemAlerta}</p>`
+    
+}
+
+function fecharAviso(){
+    let boxAlerta = document.querySelector('.caixaAlertaPosition');
+    boxAlerta.style.transform = 'translateY(-100%)';
+    let nomeInput = document.getElementById('inputNome1')
+    let emailInput = document.getElementById('inputEmail2');
+    let senhaInput = document.getElementById('inputSenha2');
+    let senhaConfirmacaoInput = document.getElementById('inputSenha3');
+    nomeInput.style.border = 'solid 2px #9e9e9e';
+    emailInput.style.border = 'solid 2px #9e9e9e';
+    senhaInput.style.border = 'solid 2px #9e9e9e';
+    senhaConfirmacaoInput.style.border = 'solid 2px #9e9e9e';
+    nomeInput.disabled = false;
+    emailInput.disabled = false;
+    senhaInput.disabled = false;
+    senhaConfirmacaoInput.disabled = false;
+}
+
+function mostrarCadastroEfetuado(){
+    let caixaCadastroPosition = document.querySelector('.caixaCadastroPosition')
+    let caixaDesfoque = document.querySelector('.boxDesfoque')
+    caixaCadastroPosition.style.display = 'block';
+    caixaDesfoque.style.display = 'block';
+    caixaCadastroPosition.style.opacity = '100%';
+    caixaDesfoque.style.opacity = '100%';
+}
+
+function fecharEfetuado(){
+    
+    let caixaCadastroPosition = document.querySelector('.caixaCadastroPosition')
+    let caixaDesfoque = document.querySelector('.boxDesfoque')
+    caixaCadastroPosition.style.display = 'none';
+    caixaDesfoque.style.display = 'none';
+    caixaCadastroPosition.style.opacity = '0%';
+    caixaDesfoque.style.opacity = '0%';
+    mudarTela2()
+}
