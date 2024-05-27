@@ -1,0 +1,1014 @@
+/* CSS NavBar da Plataforma e Home: */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background-image: url(../assets/plataforma/fundoPlataforma.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.boxes {
+    display: flex;
+    width: 1460px;
+    height: 802px;
+}
+
+.navBox {
+    width: 357px;
+    height: 100%;
+    background-color: #311934;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 1px 9px 28px 0px rgba(0,0,0,0.75);
+}
+
+.nomePerfil {
+    color: #FFFFFF;
+    margin: 30px auto;
+    font-size: 18px;
+    text-align: center;
+}
+
+.fotoPerfil {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    overflow: hidden
+}
+
+.fotoPerfil img {
+    width: 100%;
+    height: 105%;
+    scale: 1.3;
+    object-fit: cover;
+    justify-content: center;
+}
+
+.navButtons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    scale: 1.15;
+    margin-top: 40px;
+}
+
+#boxIcons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    right: 250px;
+    gap: 5px;
+}
+
+.iconBtn {
+    background-color: #fe50db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxButtons {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: absolute;
+    z-index: 1;
+}
+
+.btn {
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(209, 209, 209);
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+}
+
+.btn::before {
+    width: 200px;
+    height: 130px;
+    position: absolute;
+    content: "";
+    background-color: #fc29d2;
+    border-radius: 50%;
+    left: -100%;
+    top: 0;
+    transition-duration: .3s;
+    mix-blend-mode: hard-light;
+}
+
+.btn:hover::before {
+    transition-duration: .3s;
+    transform: translate(100%, -50%);
+    border-radius: 0;
+}
+
+.btn:active {
+    transform: translateX(10px);
+    transition-duration: .1s;
+}
+
+.interfaceBox1,.interfaceBox2,.interfaceBox3,.interfaceBox4 {
+    width: 1103px;
+    height: 100%;
+    background-color: rgba(217, 217, 217, 0.3);
+}
+
+.interfaceBox3{
+    padding-left: 25px;
+}
+
+.boxLogo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: 300px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.boxLogo img {
+    width: 110px;
+}
+
+.txtDireitos {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.407);
+    width: 500px;
+    text-align: center;
+    padding-bottom: 300px;
+}
+
+.boxDados1 {
+    height: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+.boxDados1 h1 {
+    color: #FFFFFF;
+    padding-top: 25px;
+    font-size: 28px;
+}
+
+.firstLine1 {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin: 30px 60px 0;
+}
+
+.spanNome {
+    width: 480px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.spanNome p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.boxNomePlotado{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.boxEmailPlotado{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.boxDataPlotada{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.boxJogosPlotados{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.boxRankingPlotado{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.boxPublicacoesPlotadas{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.boxSeguidoresPlotados{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.boxPontuacaoPlotada{
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.spanEmail {
+    width: 500px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.spanEmail p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.secondLine1 {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin: 10px 60px 0;
+}
+
+.spanData {
+    width: 360px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.spanData p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanJogosFeitos1 {
+    width: 230px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 82px;
+}
+
+.spanJogosFeitos1 p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanRanking1 {
+    width: 230px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 82px;
+}
+
+.spanRanking1 p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.thirdLine1 {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin: 10px 60px 0;
+}
+
+.spanPublicacoes1 {
+    width: 230px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.spanPublicacoes1 p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanSeguidores {
+    width: 220px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 120px;
+}
+
+.spanSeguidores p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanPontuacaoTotal{
+    width: 320px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 100px;
+}
+
+.spanPontuacaoTotal p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.boxAnotacoes {
+    height: 960px;
+    width: 100%;
+    text-align: center;
+}
+
+.boxAnotacoes h1 {
+    color: #FFFFFF;
+    padding-top: 25px;
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+.boxAnotacoes2 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 400px;
+}
+
+
+.caixaTexto1 {
+    margin: 30px 60px;
+    padding: 10px 0 0 10px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 660px;
+    height: 280px;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    resize: none; /* Disable manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+}   
+
+.anotacoesSalvas{
+    margin: 30px 5px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 260px;
+    height: 280px;
+    border-radius: 10px;
+}
+
+.btnSalvar {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    background-color: #171717;
+    padding: 1em 2em;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    bottom: 50px;
+}
+  
+ .btnSalvar span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 30px;
+    background-color: #ff00e6;
+    border-radius: 50%;
+    transition: .6s ease;
+}
+  
+.btnSalvar span:nth-child(6) {
+    position: relative;
+}
+  
+.btnSalvar span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+}
+  
+.btnSalvar span:nth-child(2) {
+    transform: translate(-6em, 1.3em);
+}
+  
+.btnSalvar span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+}
+  
+.btnSalvar span:nth-child(4) {
+    transform: translate(3.5em, 1.4em);
+}
+  
+.btnSalvar span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+}
+  
+.btnSalvar:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+}
+    
+.btnSalvar:active{
+    scale: 1.2;
+    transition: .3s;
+}
+
+.displayToggle{
+    display: block;
+}
+
+.displayToggle2{
+    display: none;
+}
+
+.displayToggle3{
+    display: none;
+}
+
+
+.displayToggle4{
+    display: none
+}
+
+
+
+
+/* CSS Forum: */
+
+.boxPosts{
+    width: 1050px;
+    height: 600px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    margin: 20px auto 0;
+}
+
+.caixaTexto2{
+    width: 850px;
+    height: 140px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    margin: 20px 25px 0;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 10px 0 0 10px;
+    resize: none; /* Disable manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+}
+
+.enviarBtn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    background-color: #171717;
+    padding: 1em 2em;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    bottom: 60px;
+    left: 15px;
+}
+  
+ .enviarBtn span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 30px;
+    background-color: #ff00e6;
+    border-radius: 50%;
+    transition: .6s ease;
+}
+  
+.enviarBtn span:nth-child(6) {
+    position: relative;
+}
+  
+.enviarBtn span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+}
+  
+.enviarBtn span:nth-child(2) {
+    transform: translate(-6em, 1.3em);
+}
+  
+.enviarBtn span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+}
+  
+.enviarBtn span:nth-child(4) {
+    transform: translate(3.5em, 1.4em);
+}
+  
+.enviarBtn span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+}
+  
+.enviarBtn:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+}
+
+.enviarBtn:active{
+    scale: 1.2;
+    transition: .2s;
+}
+
+
+
+/* CSS Quiz: */
+
+.quizInicio1{
+    display: block;
+    width: 1050px;
+    height: 760px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    margin: 20px auto 0;
+}
+
+.quizInicio2{
+    display: none;
+    width: 1050px;
+    height: 760px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    margin: 20px auto 0;
+}
+
+.logoQuiz{
+    width: 420px;
+    height: 400px;
+    margin: 30px auto;
+}
+
+.logoQuiz img{
+    width: 100%;
+    height: 100%;
+}
+
+.quizInicio1 h1{
+    color: #FFFFFF;
+    text-align: center;
+    position: relative;
+    bottom: 100px;
+    font-size: 40px;
+}
+
+
+.btn-conteiner {
+    position: relative;
+    display: flex;
+    bottom: 70px;
+    justify-content: center;
+    --color-text: #ffffff;
+    --color-background: #EE609C;
+    --color-outline: #ff145b80;
+    --color-shadow: #00000080;
+  }
+  
+  .btn-content {
+    display: flex;
+    align-items: center;
+    padding: 5px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--color-text);
+    background: var(--color-background);
+    transition: 1s;
+    border-radius: 100px;
+    box-shadow: 0 0 0.2em 0 var(--color-background);
+  }
+  
+  .btn-content:hover, .btn-content:focus {
+    transition: 0.5s;
+    -webkit-animation: btn-content 1s;
+    animation: btn-content 1s;
+    outline: 0.1em solid transparent;
+    outline-offset: 0.2em;
+    box-shadow: 0 0 0.4em 0 var(--color-background);
+  }
+  
+  .btn-content .icon-arrow {
+    transition: 0.5s;
+    margin-right: 0px;
+    transform: scale(0.6);
+  }
+  
+  .btn-content:hover .icon-arrow {
+    transition: 0.5s;
+    margin-right: 25px;
+  }
+  
+  .icon-arrow {
+    width: 20px;
+    margin-left: 15px;
+    position: relative;
+    top: 6%;
+  }
+    
+  /* SVG */
+  #arrow-icon-one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+  }
+  
+  #arrow-icon-two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+  }
+  
+  .btn-content:hover #arrow-icon-three {
+    animation: color_anim 1s infinite 0.2s;
+  }
+  
+  .btn-content:hover #arrow-icon-one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+  }
+  
+  .btn-content:hover #arrow-icon-two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+  }
+  
+  /* SVG animations */
+  @keyframes color_anim {
+    0% {
+      fill: white;
+    }
+  
+    50% {
+      fill: var(--color-background);
+    }
+  
+    100% {
+      fill: white;
+    }
+  }
+  
+  /* Button animations */
+  @-webkit-keyframes btn-content {
+    0% {
+      outline: 0.2em solid var(--color-background);
+      outline-offset: 0;
+    }
+  }
+  
+  @keyframes btn-content {
+    0% {
+      outline: 0.2em solid var(--color-background);
+      outline-offset: 0;
+    }
+  }
+  
+
+
+.boxPergunta{
+    width: 95%;
+    height: 100px;
+    background-color: #e0e0e0;
+    margin: 50px auto 0;
+    padding: 35px 20px 0;
+    box-shadow: 1px 9px 28px 0px rgba(0,0,0,0.75);
+}
+
+.boxPergunta h2{
+    color: #512557;
+}
+
+.boxAlternativas{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin: 150px auto 80px;
+    gap: 80px;
+}
+
+.alternativa1,.alternativa2,.alternativa3,.alternativa4{
+    width: 450px;
+    height: 80px;
+    background-color: #e0e0e0;
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 1px 9px 28px 0px rgba(0,0,0,0.75);
+}
+
+.alternativa1:hover,.alternativa2:hover,.alternativa3:hover,.alternativa4:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+    background: #fc29d2;
+}
+
+.alternativa1:active,.alternativa2:active,.alternativa3:active,.alternativa4:active{
+    transform: scale(0.9);
+    transition: 0.5s;
+    background: #fc29d2;
+}
+
+
+.boxPergunta img{
+    position: relative;
+    width: 100px;
+    left: 900px;
+    bottom: 32px;
+    transform: rotate(15deg)
+}
+
+.boxBotao{
+    display: flex;
+    justify-content: center;
+}
+
+.botaoAvancar{
+    width: 250px;
+    box-shadow: 1px 9px 28px 0px rgba(0,0,0,0.75);
+    border-radius: 20px;
+    height: 60px;
+    background-color: #00a2ff;
+    text-align: center;
+    padding-top: 15px;
+    cursor: pointer;
+    transition: 0.5s;
+    display: none;
+}
+
+.botaoAvancar:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.botaoAvancar:active{
+    transform: scale(0.9);
+    transition: 0.5s;
+}
+
+.botaoAvancar h2{
+    color: #FFFFFF;
+}
+
+
+
+/* CSS Estatisticas: */
+
+.boxDados2 {
+    height: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+.boxDados2 h1 {
+    color: #FFFFFF;
+    padding-top: 25px;
+    font-size: 28px;
+}
+
+.firstLine2 {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin: 30px 60px 0;
+}
+
+.spanJogadores {
+    width: 280px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.spanJogadores p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanPublicacoes2 {
+    width: 290px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+
+.spanPublicacoes2 p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.spanPontuacao2 {
+    width: 360px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+
+.spanPontuacao2 p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.secondLine2 {
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    margin: 10px 60px 0;
+}
+
+
+.spanJogosFeitos2 {
+    width: 230px;
+    height: 55px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.spanJogosFeitos2 p {
+    color: #fc29d2;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+
+.boxAnalise {
+    height: 960px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 60px;
+}
+
+.boxAnalise h1 {
+    color: #FFFFFF;
+    padding-top: 25px;
+    font-size: 28px;
+}
+
+.boxDadosApurados {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 480px;
+}
+
+.boxRanking2 {
+    margin: 30px 0 0 60px;
+    padding-top: 5px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 300px;
+    height: 450px;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    resize: none; /* Disable manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+}   
+
+.ranks{
+    margin: 5px 5px 0;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 283px;
+    height: 390px;
+    border-radius: 10px;
+}
+
+.boxGraficos {
+    margin: 30px 0 0 30px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    width: 655px;
+    height: 450px;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    resize: none; /* Disable manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+}   
+
+
+@keyframes opacity{
+    0%{
+        opacity: 0%;
+        scale: 50%;
+    }
+    
+    100%{
+        scale: 100%;
+        opacity: 100%;
+    }
+}
+
+
+
