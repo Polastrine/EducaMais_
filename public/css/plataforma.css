@@ -623,6 +623,58 @@ body {
     margin: 20px auto 0;
 }
 
+.quizInicio3{
+    display: none;
+    width: 1050px;
+    height: 760px;
+    background-color: #242424bd;
+    border: 3px solid #311934;
+    margin: 20px auto 0;
+}
+
+.boxFinal{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 400px; 
+    background-color: #fc29d2;
+    border-radius: 20px;
+    box-shadow: 1px 9px 28px 0px rgba(0,0,0,0.75);
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.boxFinal h1{
+    color: #FFFFFF;
+    margin-bottom: 250px;
+    margin-top: 20px;
+}
+
+.boxFinal p{
+    color: #FFFFFF;
+    font-size: 25px;
+    position: relative;
+    bottom: 160px;
+}
+
+.boxFinal .pontuacaoFeita{
+    background-color: #512557;
+    border-radius: 20px;
+    height: 50px;
+    width: 150px;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 5px;
+    box-shadow: 1px 7px 12px 0px rgba(0,0,0,0.75);
+}
+
+.boxFinal img{
+    width: 140px;
+    position: absolute;
+    top: 539px;
+}
+
 .logoQuiz{
     width: 420px;
     height: 400px;

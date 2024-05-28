@@ -541,12 +541,36 @@ function verificarResposta() {
         }
 
         posicao++;
-        if(posicao != 10){
-            setTimeout(() => exibirPergunta(posicao), 3000);
+        if(posicao < 10){
+            setTimeout(() => exibirPergunta(posicao), 2000);
         } else{
-            
+            setTimeout(() => finalizarQuiz(), 3000);
         }
-
-    
     }
+}
+
+function finalizarQuiz(){
+    const quizInterface2 = document.querySelector('.quizInicio2');
+    const quizInterface3 = document.querySelector('.quizInicio3');
+
+    quizInterface2.style.display = 'none';
+    quizInterface3.style.display = 'flex';
+
+    let pontuacaoFeita = document.getElementById('pontuacaoFeita')
+    pontuacaoFeita.innerHTML = `${pontuacao}/10`
+
+    setTimeout(() => reiniciarQuiz(), 3000);
+}
+
+function reiniciarQuiz(){
+    const quizInterface1 = document.querySelector('.quizInicio1')
+    const quizInterface3 = document.querySelector('.quizInicio3');
+
+    quizInterface1.style.display = 'block';
+    quizInterface3.style.display = 'none';
+
+    // Resetando variáveis
+    posicao = 0;
+    pontuacao = 0;
+    perguntasAleatorias = listaPerguntas.sort(() => Math.random() - 0.5).slice(0, 10); // Reembaralhando perguntas
 }
