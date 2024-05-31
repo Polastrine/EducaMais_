@@ -19,6 +19,8 @@ function acessarHome(){
     interfaceBox2.style.display = 'none'
     interfaceBox3.style.display = 'none'
     interfaceBox4.style.display = 'none'
+
+    plotarDados()
 }
 
 
@@ -124,27 +126,26 @@ function plotarDados() {
         }
     }
 
-    const box_nomeUsuario = document.getElementById('nomePerfil');
-    const span_nomeUsuario = document.getElementById('spanNome');
-    const span_emailUsuario = document.getElementById('spanEmail');
-    const span_dataCriacaoUsuario = document.getElementById('spanData');
-    const box_jogosFeitos = document.getElementById('spanJogosFeitos1');
-    const box_publicacoes = document.getElementById('spanPublicacoes1');
-    const box_seguidores = document.getElementById('spanSeguidores');
-    const box_pontuacaoTotal = document.getElementById('spanPontuacaoTotal');
+    const box_nomeUsuario = document.getElementById('nomePerfilNav');
+    const span_nomeUsuario = document.getElementById('boxNomePlotado');
+    const span_emailUsuario = document.getElementById('boxEmailPlotado');
+    const span_dataCriacaoUsuario = document.getElementById('boxDataPlotada');
+    const box_jogosFeitos = document.getElementById('boxJogosPlotados');
+    const box_publicacoes = document.getElementById('boxPublicacoesPlotadas');
+    const box_seguidores = document.getElementById('boxSeguidoresPlotados');
+    const box_pontuacaoTotal = document.getElementById('boxPontuacaoPlotada');
 
-    box_nomeUsuario.innerHTML += `<p><b>${nomeUsuarioNav}</b></p>`;
-    span_nomeUsuario.innerHTML += `<span class="boxNomePlotado">${nomeUsuario}</span>`;
-    span_emailUsuario.innerHTML += `<span class="boxEmailPlotado">${emailUsuario}</span>`;
-    span_dataCriacaoUsuario.innerHTML += `<span class="boxDataPlotada">${dataCriacaoEditada}</span>`;
-    box_jogosFeitos.innerHTML += `<span class="boxJogosPlotados">${jogosFeitos}</span>`;
-    box_publicacoes.innerHTML += `<span class="boxPublicacoesPlotadas">${qntdPublicacoes}</span>`;
-    box_seguidores.innerHTML += `<span class="boxSeguidoresPlotados">${qntdSeguidores}</span>`;
-    if(pontuacaoTotal){
+    box_nomeUsuario.innerHTML = `${nomeUsuarioNav}`;
+    span_nomeUsuario.innerHTML = `${nomeUsuario}`;
+    span_emailUsuario.innerHTML = `${emailUsuario}`;
+    span_dataCriacaoUsuario.innerHTML = `${dataCriacaoEditada}`;
+    box_jogosFeitos.innerHTML = `${jogosFeitos}`;
+    box_publicacoes.innerHTML = `${qntdPublicacoes}`;
+    box_seguidores.innerHTML = `${qntdSeguidores}`;
+    if(pontuacaoTotal == null){
         pontuacaoTotal = 0;
     }
-    box_pontuacaoTotal.innerHTML += `<span class="boxPontuacaoPlotada">${pontuacaoTotal}</span>`;
-    
+    box_pontuacaoTotal.innerHTML = `${pontuacaoTotal}`;
 }
 
 
@@ -566,28 +567,48 @@ function verificarResposta() {
     }
 }
 
-function finalizarQuiz(pontuacao){
+function finalizarQuiz(){
     const quizInterface2 = document.querySelector('.quizInicio2');
     const quizInterface3 = document.querySelector('.quizInicio3');
 
     quizInterface2.style.display = 'none';
     quizInterface3.style.display = 'flex';
 
-    let pontuacaoFeita = document.getElementById('pontuacaoFeita')
-    pontuacaoFeita.innerHTML = `${pontuacao}/10`
+    let pontuacaoFeita = document.getElementById('pontuacaoFeita');
+    pontuacaoFeita.innerHTML = `${pontuacao}/10`;
 
-    fetch("/resultado/salvarPontuacao", {
-        method: 'POST',
+    fetch("/resultado/salvar", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            pontuacaoServer: pontuacao
+            pontuacao: pontuacao,
+            idUsuario: sessionStorage.ID_USUARIO
         })
     })
+    .then(function(resposta) {
+        if (resposta.ok) {
+            return resposta.json();
+        } else {
+            console.log("Erro ao salvar pontuação.");
+        }
+    })
+    .then(function (json) {
+        if (json) {
+            // Atualizar os dados do usuário no sessionStorage
+            sessionStorage.JOGOS_FEITOS = json.jogosFeitos;
+            sessionStorage.PONTUACAO_TOTAL = json.pontuacaoTotal;
 
-    setTimeout(() => reiniciarQuiz(), 3000);
+            setTimeout(() => reiniciarQuiz(), 3000);
+        }
+    })
+    .catch(function (erro) {
+        console.log(erro.message);
+        mostrarAlerta(erro.message);
+    });
 }
+
 
 function reiniciarQuiz(){
     const quizInterface1 = document.querySelector('.quizInicio1')
