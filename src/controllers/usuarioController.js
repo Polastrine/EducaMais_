@@ -4,26 +4,38 @@ function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (email == undefined) {
+    if (!email) {
         res.status(400).send("Seu email está indefinido!");
-    } else if (senha == undefined) {
+    } else if (!senha) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
         usuarioModel.autenticar(email, senha)
             .then(function (resultadoAutenticar) {
                 if (resultadoAutenticar.length == 0) {
-                    res.status(403).send("Email e/ou senha inválido(s)");
+                    res.status(401).send("Email e/ou senha inválido(s)");
                 } else if (resultadoAutenticar.length > 1) {
                     res.status(500).send("Mais de um usuário com o mesmo login e senha!");
                 } else {
-                    // Aqui retornamos os dados do usuário com status 200 (OK)
-                    console.log(resultadoAutenticar)
-                    res.status(200).json({
-                        id: resultadoAutenticar[0].idUsuario,
-                        nome: resultadoAutenticar[0].nome,
-                        email: resultadoAutenticar[0].email,
-                        dataCriacao: resultadoAutenticar[0].dataCriacao
-                    });
+                    const usuario = resultadoAutenticar[0];
+                    usuarioModel.obterDadosUsuario(usuario.idUsuario) // Pego o idUsuario vindo como resultado da função autenticar e uso como parâmetro na função obterDadosUsuario()
+                        .then(function (resultadoDados) {
+                            const dadosUsuario = resultadoDados[0];
+                            res.status(200).json({
+                                id: usuario.idUsuario,
+                                nome: usuario.nome,
+                                email: usuario.email,
+                                dataCriacao: usuario.dataCriacao,
+                                jogosFeitos: dadosUsuario.jogosFeitos,
+                                publicacoes: dadosUsuario.publicacoes,
+                                seguidores: dadosUsuario.seguidores,
+                                pontuacaoTotal: dadosUsuario.pontuacaoTotal
+                            });
+                        })
+                        .catch(function (erro) {
+                            console.log(erro);
+                            console.log("\nHouve um erro ao obter os dados adicionais do usuário! Erro: ", erro.sqlMessage);
+                            res.status(500).json(erro.sqlMessage);
+                        });
                 }
             })
             .catch(function (erro) {
@@ -67,6 +79,8 @@ function cadastrar(req, res) {
             );
     }
 }
+
+
 
 module.exports = {
     autenticar,

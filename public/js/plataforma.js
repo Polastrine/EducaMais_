@@ -103,33 +103,50 @@ function voltarHome(){
 }
 
 
-function plotarDados(){
+function plotarDados() {
     let nomeUsuario = sessionStorage.NOME_USUARIO;
-    let nomeUsuarioNav = '';
     let emailUsuario = sessionStorage.EMAIL_USUARIO;
     let dataCriacao = sessionStorage.DATA_CRIACAO;
-    let dataCriacaoEditado = dataCriacao.slice(0,10);
+    let jogosFeitos = sessionStorage.JOGOS_FEITOS;
+    let qntdPublicacoes = sessionStorage.PUBLICACOES;
+    let qntdSeguidores = sessionStorage.SEGUIDORES;
+    let pontuacaoTotal = sessionStorage.PONTUACAO_TOTAL;
 
-    for(let posicaoLetra = 0; posicaoLetra < nomeUsuario.length; posicaoLetra++){
+    let nomeUsuarioNav = '';
+    let dataCriacaoEditada = dataCriacao.slice(0, 10);
+
+    for (let posicaoLetra = 0; posicaoLetra < nomeUsuario.length; posicaoLetra++) {
         let letra = nomeUsuario[posicaoLetra];
-        if(letra != ' '){
+        if (letra != ' ') {
             nomeUsuarioNav += letra
-        } else{
+        } else {
             break
         }
     }
-    console.log(nomeUsuarioNav)
 
-    const box_nomeUsuario = document.getElementById('nomePerfil')
-    const span_nomeUsuario = document.getElementById('spanNome')
-    const span_emailUsuario = document.getElementById('spanEmail')
+    const box_nomeUsuario = document.getElementById('nomePerfil');
+    const span_nomeUsuario = document.getElementById('spanNome');
+    const span_emailUsuario = document.getElementById('spanEmail');
     const span_dataCriacaoUsuario = document.getElementById('spanData');
+    const box_jogosFeitos = document.getElementById('spanJogosFeitos1');
+    const box_publicacoes = document.getElementById('spanPublicacoes1');
+    const box_seguidores = document.getElementById('spanSeguidores');
+    const box_pontuacaoTotal = document.getElementById('spanPontuacaoTotal');
 
     box_nomeUsuario.innerHTML += `<p><b>${nomeUsuarioNav}</b></p>`;
-    span_nomeUsuario.innerHTML += `<span class="boxNomePlotado">${nomeUsuario}</span>`  
-    span_emailUsuario.innerHTML += `<span class="boxEmailPlotado">${emailUsuario}</span>` 
-    span_dataCriacaoUsuario.innerHTML += `<span class="boxDataPlotada">${dataCriacaoEditado}</span>` 
+    span_nomeUsuario.innerHTML += `<span class="boxNomePlotado">${nomeUsuario}</span>`;
+    span_emailUsuario.innerHTML += `<span class="boxEmailPlotado">${emailUsuario}</span>`;
+    span_dataCriacaoUsuario.innerHTML += `<span class="boxDataPlotada">${dataCriacaoEditada}</span>`;
+    box_jogosFeitos.innerHTML += `<span class="boxJogosPlotados">${jogosFeitos}</span>`;
+    box_publicacoes.innerHTML += `<span class="boxPublicacoesPlotadas">${qntdPublicacoes}</span>`;
+    box_seguidores.innerHTML += `<span class="boxSeguidoresPlotados">${qntdSeguidores}</span>`;
+    if(pontuacaoTotal){
+        pontuacaoTotal = 0;
+    }
+    box_pontuacaoTotal.innerHTML += `<span class="boxPontuacaoPlotada">${pontuacaoTotal}</span>`;
+    
 }
+
 
 
 let listaPerguntas = [
@@ -544,12 +561,12 @@ function verificarResposta() {
         if(posicao < 10){
             setTimeout(() => exibirPergunta(posicao), 2000);
         } else{
-            setTimeout(() => finalizarQuiz(), 3000);
+            setTimeout(() => finalizarQuiz(pontuacao), 3000);
         }
     }
 }
 
-function finalizarQuiz(){
+function finalizarQuiz(pontuacao){
     const quizInterface2 = document.querySelector('.quizInicio2');
     const quizInterface3 = document.querySelector('.quizInicio3');
 
@@ -558,6 +575,16 @@ function finalizarQuiz(){
 
     let pontuacaoFeita = document.getElementById('pontuacaoFeita')
     pontuacaoFeita.innerHTML = `${pontuacao}/10`
+
+    fetch("/resultado/salvarPontuacao", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            pontuacaoServer: pontuacao
+        })
+    })
 
     setTimeout(() => reiniciarQuiz(), 3000);
 }

@@ -185,7 +185,6 @@ function cadastrar(){
                 let mensagemAlerta = 'Confirmação de senha inválida!';
                 mostrarAlerta(mensagemAlerta);
             } else {
-                mostrarCadastroEfetuado()
                     fetch("/usuarios/cadastrar", {
                         method: "POST",
                         headers: {
@@ -203,7 +202,7 @@ function cadastrar(){
                         console.log('Resposta:', resposta);
 
                         if (resposta.ok){
-                            mostrarCadastroEfetuado()
+                            setTimeout(() => mostrarCadastroEfetuado(), 2000);
                         }
                     })
             }
@@ -246,12 +245,20 @@ function acessar() {
             }
         })
         .then(function (json) {
-            console.log(json);
-            sessionStorage.EMAIL_USUARIO = json.email;
-            sessionStorage.NOME_USUARIO = json.nome;
-            sessionStorage.ID_USUARIO = json.id;
-            sessionStorage.DATA_CRIACAO = json.dataCriacao;
-            window.location.href = '../plataforma.html';
+            if (json) {
+                // Armazenar os dados do usuário no sessionStorage
+                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.NOME_USUARIO = json.nome;
+                sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.DATA_CRIACAO = json.dataCriacao;
+                sessionStorage.JOGOS_FEITOS = json.jogosFeitos;
+                sessionStorage.PUBLICACOES = json.publicacoes;
+                sessionStorage.SEGUIDORES = json.seguidores;
+                sessionStorage.PONTUACAO_TOTAL = json.pontuacaoTotal;
+    
+                // Redirecionar para a plataforma
+                window.location.href = '../plataforma.html';
+            }
         })
         .catch(function (erro) {
             console.log(erro.message);
