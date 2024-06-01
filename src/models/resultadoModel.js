@@ -10,11 +10,6 @@ function salvarPontuacao(pontuacao, idUsuario) {
     return database.executar(instrucaoSql);
 }
 
-
-
-
-
-
 module.exports = {
     salvarPontuacao
 }

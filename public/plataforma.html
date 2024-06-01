@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body onload="plotarDados()">
+<body onload="plotarDados(), listarAnotacoes()">
     <div class="boxes">
         <div class="navBox">
             <div id="nomePerfil" class="nomePerfil">
@@ -101,11 +101,11 @@
                     <h1> ANOTAÇÕES <b style="color: #393939;">PESSOAIS</b></h1>
                     <div class="boxAnotacoes2">
                         <textarea class="caixaTexto1" id='caixaTexto' placeholder="Faça as suas anotações aqui..."></textarea>
-                        <div class="anotacoesSalvas">
-
+                        <div id="anotacoesSalvas" class="anotacoesSalvas">
+                            
                         </div>
                     </div>
-                    <button class="btnSalvar">
+                    <button onclick="inserirAnotacao()" class="btnSalvar">
                         <span class="circle1"></span>
                         <span class="circle2"></span>
                         <span class="circle3"></span>

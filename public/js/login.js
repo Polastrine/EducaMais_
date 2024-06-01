@@ -185,7 +185,7 @@ function cadastrar(){
                 let mensagemAlerta = 'Confirmação de senha inválida!';
                 mostrarAlerta(mensagemAlerta);
             } else {
-                    fetch("/usuarios/cadastrar", {
+                    fetch("/usuario/cadastrar", {
                         method: "POST",
                         headers: {
                         "Content-Type": "application/json",
@@ -224,7 +224,7 @@ function acessar() {
         let mensagemAlerta = 'Preencha todos os campos!';
         mostrarAlerta(mensagemAlerta);
     } else {
-        fetch("/usuarios/autenticar", {
+        fetch("/usuario/autenticar", {
             credentials: 'include',
             method: "POST",
             headers: {

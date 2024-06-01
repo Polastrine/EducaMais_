@@ -70,7 +70,7 @@ function acessarQuiz(){
     interfaceBox.style.display = 'none'
     interfaceBox2.style.display = 'none'
     interfaceBox3.style.display = 'block'
-    interfaceBox4.style.display = 'nome'
+    interfaceBox4.style.display = 'none'
 }
 
 
@@ -622,3 +622,100 @@ function reiniciarQuiz(){
     pontuacao = 0;
     perguntasAleatorias = listaPerguntas.sort(() => Math.random() - 0.5).slice(0, 10); // Reembaralhando perguntas
 }
+
+
+
+function inserirAnotacao() {
+    const idUsuario = sessionStorage.ID_USUARIO;
+    const anotacaoTexto = document.getElementById('caixaTexto').value;
+
+    fetch(`/anotacao/inserirAnotacao`, {
+        credentials: 'include',
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            anotacaoServer: anotacaoTexto,
+            idUsuarioServer: idUsuario
+        })
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            listarAnotacoes(); // Atualiza a lista de anotações após inserir
+        } else {
+            console.log("Houve um erro ao tentar inserir a anotação.");
+        }
+    })
+    .catch(function (erro) {
+        console.log(erro.message);
+    });
+}
+
+
+
+
+function listarAnotacoes() {
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch(`/anotacao/listarAnotacoes/${idUsuario}`, { 
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            return resposta.json();
+        } else {
+            console.log("Houve um erro ao tentar listar as anotações.");
+        }
+    })
+    .then(function (json) {
+        if (json) {
+            const anotacoesSalvas = document.getElementById('anotacoesSalvas');
+            anotacoesSalvas.innerHTML = ''; 
+
+            json.forEach(anotacao => {
+                anotacoesSalvas.innerHTML += `
+                    <div class="anotacaoSalvada">
+                        <h2 class="anotacaoTexto">${anotacao.Ordem}º Anotação </h2>
+                        <div onclick='deletarAnotacao(${anotacao.Ordem})' class="btn_removerAnotacao"><h1>X</h1></div>
+                    </div>
+                `;
+            });
+        }
+    })
+    .catch(function (erro) {
+        console.log(erro.message);
+    });
+}
+
+
+function deletarAnotacao(ordem) {
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch(`/anotacao/deletarAnotacao/${idUsuario}/${ordem}`, {
+        credentials: 'include',
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            console.log("Anotação deletada com sucesso.");
+            listarAnotacoes();
+        } else {
+            console.log("Houve um erro ao tentar deletar a anotação.");
+        }
+    })
+    .catch(function (erro) {
+        console.log(erro.message);
+    });
+}
+
+
+
+

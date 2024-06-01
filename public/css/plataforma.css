@@ -143,9 +143,6 @@ body {
     background-color: rgba(217, 217, 217, 0.3);
 }
 
-.interfaceBox3{
-    padding-left: 25px;
-}
 
 .boxLogo {
     position: relative;
@@ -433,6 +430,70 @@ body {
     width: 260px;
     height: 280px;
     border-radius: 10px;
+    padding: 0 10px 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.anotacoesSalvas::-webkit-scrollbar {
+    width: 2px; 
+}
+
+.anotacoesSalvas::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+/* Estilizando o "polegar" da barra de rolagem */
+.anotacoesSalvas::-webkit-scrollbar-thumb {
+    background: rgb(0, 187, 255); 
+    border-radius: 10px; 
+}
+
+.anotacaoSalvada{
+    background-color: rgba(255, 255, 255, 0.64);
+    margin-top: 10px;
+    width: 240px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.anotacaoSalvada:hover{
+    background-color: rgba(134, 134, 134, 0.64);
+    transition: 0.5s;
+}
+
+.anotacaoTexto{
+    color: #2c2c2c;
+    margin-right: 25px;
+}
+
+.btn_removerAnotacao{
+    background-color: #0075b8;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+}
+
+.btn_removerAnotacao:hover{
+    background-color: #00314d;
+    scale: 1.1;
+    transition: 0.5s;
+}
+
+.btn_removerAnotacao h1{
+    margin: 0;
+    padding: 0;
 }
 
 .btnSalvar {
