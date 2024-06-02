@@ -10,6 +10,23 @@ function salvarPontuacao(pontuacao, idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function exibirRanking() {
+    var instrucaoSql = `
+        SELECT 
+            ROW_NUMBER() OVER (ORDER BY SUM(resultado.pontuacao) DESC) AS Posição,
+            usuario.nome AS Nome,
+            SUM(resultado.pontuacao) AS PontuacaoTotal
+        FROM usuario 
+        JOIN resultado ON usuario.idUsuario = resultado.fkUsuario
+        GROUP BY usuario.idUsuario, usuario.nome
+        ORDER BY 'Pontuação Total' DESC;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
-    salvarPontuacao
+    salvarPontuacao,
+    exibirRanking
 }

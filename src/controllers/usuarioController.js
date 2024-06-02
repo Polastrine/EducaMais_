@@ -1,8 +1,8 @@
-var usuarioModel = require("../models/usuarioModel");
+const usuarioModel = require("../models/usuarioModel");
 
 function autenticar(req, res) {
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
+    const email = req.body.emailServer;
+    const senha = req.body.senhaServer;
 
     if (!email) {
         res.status(400).send("Seu email está indefinido!");
@@ -48,9 +48,9 @@ function autenticar(req, res) {
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var nomeCompleto = req.body.nomeServer;
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
+    const nomeCompleto = req.body.nomeServer;
+    const email = req.body.emailServer;
+    const senha = req.body.senhaServer;
 
     // Faça as validações dos valores
     if (nomeCompleto == undefined) {

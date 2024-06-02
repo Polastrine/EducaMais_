@@ -1,4 +1,4 @@
-var publicacaoModel = require("../models/publicacaoModel");
+const publicacaoModel = require("../models/publicacaoModel");
 
 function listar(req, res) {
     publicacaoModel.listar().then(function (resultado) {
@@ -15,7 +15,7 @@ function listar(req, res) {
 }
 
 function listarPorUsuario(req, res) {
-    var idUsuario = req.params.idUsuario;
+    const idUsuario = req.params.idUsuario;
 
     publicacaoModel.listarPorUsuario(idUsuario)
         .then(
@@ -40,7 +40,7 @@ function listarPorUsuario(req, res) {
 }
 
 function pesquisarDescricao(req, res) {
-    var descricao = req.params.descricao;
+    const descricao = req.params.descricao;
 
     publicacaoModel.pesquisarDescricao(descricao)
         .then(
@@ -61,9 +61,9 @@ function pesquisarDescricao(req, res) {
 }
 
 function publicar(req, res) {
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-    var idUsuario = req.params.idUsuario;
+    const titulo = req.body.titulo;
+    const descricao = req.body.descricao;
+    const idUsuario = req.params.idUsuario;
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
@@ -89,8 +89,8 @@ function publicar(req, res) {
 }
 
 function editar(req, res) {
-    var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
+    const novaDescricao = req.body.descricao;
+    const idAviso = req.params.idAviso;
 
     publicacaoModel.editar(novaDescricao, idAviso)
         .then(
@@ -109,7 +109,7 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    const idAviso = req.params.idAviso;
 
     publicacaoModel.deletar(idAviso)
         .then(

@@ -1084,8 +1084,9 @@ body {
     color: white;
     font-size: 16px;
     border-radius: 10px;
-    resize: none; /* Disable manual resizing */
     overflow: hidden; /* Hide scrollbars */
+    display: flex;
+    flex-direction: column;
 }   
 
 .ranks{
@@ -1095,6 +1096,24 @@ body {
     width: 283px;
     height: 390px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.ranks::-webkit-scrollbar {
+    width: 2px; 
+}
+
+.ranks::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+/* Estilizando o "polegar" da barra de rolagem */
+.ranks::-webkit-scrollbar-thumb {
+    background: rgb(0, 187, 255); 
+    border-radius: 10px; 
 }
 
 .boxGraficos {
@@ -1108,8 +1127,36 @@ body {
     border-radius: 10px;
     resize: none; /* Disable manual resizing */
     overflow: hidden; /* Hide scrollbars */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }   
 
+.boxGrafico1{
+    width: 600px;
+    height: 300px;
+    background-color: rgba(23, 23, 23, 0.273);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#myChart1{
+    width: 500px !important;
+}
+
+.boxGrafico2{
+    width: 600px;
+    height: 300px;
+    background-color: rgba(23, 23, 23, 0.273);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#myChart2{
+    width: 500px !important;
+}
 
 @keyframes opacity{
     0%{
@@ -1124,4 +1171,100 @@ body {
 }
 
 
+.jogadoresAtivos{
+    color: #FFFFFF;
+    padding-left: 10px;
+    font-weight: 500;
+}
 
+.publicacoesGlobal{
+    color: #FFFFFF;
+    padding-left: 10px;
+    font-weight: 500;
+}
+
+.pontuacaoGlobal{
+    color: #FFFFFF;
+    padding-left: 10px;
+    font-weight: 500;
+}
+
+.jogosFeitosGlobal{
+    color: #FFFFFF;
+    padding-left: 10px;
+    font-weight: 500;
+}
+
+.rankItem{
+    width: 260px;
+    height: 75px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.nomeRank{
+    width: 260px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #cecece;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 5;
+}
+
+.nomeText{
+    position: relative;
+    left: 60px;
+}
+
+.nomeText p{
+    color: #171717;
+    position: relative;
+    font-weight: bold;
+}
+
+
+.posicaoRank{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: #0075b8;
+    position: absolute;
+    z-index: 6;
+    top: 5px;
+    right: 212px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.posicaoText p{
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.pontuacaoRank{
+    width: 195px;
+    height: 35px;
+    background-color: #00314d;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    top: 45px;
+    left: 45px;
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pontuacaoText p{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    top: 3px;
+}

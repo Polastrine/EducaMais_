@@ -113,7 +113,6 @@ function plotarDados() {
     let qntdPublicacoes = sessionStorage.PUBLICACOES;
     let qntdSeguidores = sessionStorage.SEGUIDORES;
     let pontuacaoTotal = sessionStorage.PONTUACAO_TOTAL;
-
     let nomeUsuarioNav = '';
     let dataCriacaoEditada = dataCriacao.slice(0, 10);
 
@@ -142,7 +141,7 @@ function plotarDados() {
     box_jogosFeitos.innerHTML = `${jogosFeitos}`;
     box_publicacoes.innerHTML = `${qntdPublicacoes}`;
     box_seguidores.innerHTML = `${qntdSeguidores}`;
-    if(pontuacaoTotal == null){
+    if(pontuacaoTotal == 'null'){
         pontuacaoTotal = 0;
     }
     box_pontuacaoTotal.innerHTML = `${pontuacaoTotal}`;
@@ -717,5 +716,170 @@ function deletarAnotacao(ordem) {
 }
 
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    const ctx1 = document.getElementById('myChart1').getContext('2d');
+
+    var graficoBarras1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Jogadores Ativos', 'Publicações', 'Pontuação Global', 'Jogos Feitos'],
+            datasets: [{
+                label: 'Estatísticas Globais',
+                data: [],
+                backgroundColor: '#fc29d2', // Cor de fundo
+                borderColor: '#ffffff', // Cor da borda branca
+                borderWidth: 3
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Cor das fontes da legenda
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff', // Cor das fontes do eixo y
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)' // Cor dos traços de fundo do eixo y com opacidade reduzida
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff', // Cor das fontes do eixo x
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)' // Cor dos traços de fundo do eixo x com opacidade reduzida
+                    }
+                }
+            }
+        }
+    });
+
+    fetch('/grafico/obterDadosGraficos')
+        .then(response => response.json())
+        .then(data => {
+            graficoBarras1.data.datasets[0].data = [
+                data.jogadoresAtivos,
+                data.publicacoesGlobal,
+                data.pontuacaoGlobal,
+                data.jogosFeitosGlobal
+            ];
+            graficoBarras1.update();
+
+            document.getElementById('jogadoresAtivos').innerText = data.jogadoresAtivos;
+            document.getElementById('publicacoesGlobal').innerText = data.publicacoesGlobal;
+            document.getElementById('pontuacaoGlobal').innerText = data.pontuacaoGlobal;
+            document.getElementById('jogosFeitosGlobal').innerText = data.jogosFeitosGlobal;
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do gráfico:', error);
+        });
+});
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const ctx2 = document.getElementById('myChart2').getContext('2d');
+
+    var graficoBarras2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Pontuação',
+                data: [],
+                backgroundColor: 'rgb(0, 187, 255)', 
+                borderColor: '#ffffff', 
+                borderWidth: 3
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' 
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff', 
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)' 
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff', 
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)' 
+                    }
+                }
+            }
+        }
+    });
+
+    exibirRanking(graficoBarras2);
+});
+
+
+function exibirRanking(graficoBarras2) {
+    fetch(`/resultado/exibirRanking`, { 
+        credentials: 'include',
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            return resposta.json();
+        } else {
+            console.log("Houve um erro ao tentar listar o ranking.");
+        }
+    })
+    .then(function (json) {
+        if (json) {
+            const boxRanking = document.getElementById('ranks');
+            boxRanking.innerHTML = ''; 
+
+            let labels = [];
+            let data = [];
+
+            json.forEach(usuario => {
+                boxRanking.innerHTML += `
+                    <div class="rankItem">
+                        <div class="nomeRank">
+                            <span class="nomeText"><p>${usuario.Nome}</p></span>
+                        </div>
+                        <div class="posicaoRank">
+                            <span class="posicaoText"><p>${usuario.Posição}º</p></span>              
+                        </div>
+                        <div class="pontuacaoRank">
+                            <span class="pontuacaoText"><p>${usuario.PontuacaoTotal}</p></span>
+                        </div>
+                    </div>
+                `;
+                labels.push(usuario.Nome);
+                data.push(usuario.PontuacaoTotal);
+            });
+
+            graficoBarras2.data.labels = labels;
+            graficoBarras2.data.datasets[0].data = data;
+            graficoBarras2.update();
+        }
+    })
+    .catch(function (erro) {
+        console.log(erro.message);
+    });
+}
 
 

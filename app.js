@@ -20,6 +20,8 @@ var usuarioRouter = require("./src/routes/usuario");
 var publicacaoRouter = require("./src/routes/publicacao");
 var resultadoRouter = require("./src/routes/resultado");
 var seguidoresRouter = require("./src/routes/seguidores");
+var graficoRouter = require("./src/routes/grafico");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
+app.use("/grafico", graficoRouter);
 app.use("/anotacao", anotacaoRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/publicacao", publicacaoRouter);

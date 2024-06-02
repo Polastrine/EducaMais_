@@ -1,9 +1,9 @@
-var resultadoModel = require('../models/resultadoModel');
-var usuarioModel = require('../models/usuarioModel');
+const resultadoModel = require('../models/resultadoModel');
+const usuarioModel = require('../models/usuarioModel');
 
 function salvarPontuacao(req, res) {
-    var pontuacao = req.body.pontuacao;
-    var idUsuario = req.body.idUsuario;
+    let pontuacao = req.body.pontuacao;
+    let idUsuario = req.body.idUsuario;
 
     if (pontuacao == undefined || idUsuario == undefined) {
         res.status(400).send("Pontuação ou ID do usuário está indefinido!");
@@ -26,6 +26,26 @@ function salvarPontuacao(req, res) {
     }
 }
 
+
+
+function exibirRanking(req, res) {
+    resultadoModel.exibirRanking()
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(404).send("Nenhum dado encontrado.");
+            }
+        })
+        .catch(function (erro) {
+            console.log("Houve um erro ao buscar o ranking: ", erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+
 module.exports = {
-    salvarPontuacao
+    salvarPontuacao,
+    exibirRanking
 };

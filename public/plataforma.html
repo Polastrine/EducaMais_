@@ -195,20 +195,18 @@
                     <h1>DADOS <b style="color: #393939;">GLOBAIS</b></h1>
                     <div class="firstLine2">
                         <div class="spanJogadores"> 
-                            <p> Jogadores Ativos: </p>
+                            <p> Jogadores Ativos: <span class="jogadoresAtivos" id="jogadoresAtivos"></span></p>
                         </div>
                         <div class="spanPublicacoes2">
-                            <p> Qntd. Publicações: </p>
+                            <p> Qntd. Publicações: <span class="publicacoesGlobal" id="publicacoesGlobal"></span></p>
                         </div>
                         <div class="spanPontuacao2">
-                            <p> Pontuação Global: </p>
+                            <p> Pontuação Global: <span class="pontuacaoGlobal" id="pontuacaoGlobal"></span></p>
                         </div>
                     </div>
-
                     <div class="secondLine2">
-                        
                         <div class="spanJogosFeitos2">
-                            <p> Jogos Feitos: </p>
+                            <p> Jogos Feitos: <span class="jogosFeitosGlobal" id="jogosFeitosGlobal"></span></p>
                         </div>
                     </div> 
                 </div>
@@ -217,16 +215,21 @@
                     <div class="boxDadosApurados">
                         <div class="boxRanking2">
                             <h2> Ranking Global: </h2>
-                            <div class="ranks"></div>
+                            <div id="ranks" class="ranks">
+                            </div>
                         </div>
                         <div class="boxGraficos">
-                            <div class="boxGrafico1"></div>
+                            <div class="boxGrafico1">
+                                <canvas id="myChart1"></canvas>
+                            </div>
+                            <div class="boxGrafico2">
+                                <canvas id="myChart2"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>    
         </div>
-
     </div>
 </body>
 </html>
@@ -236,3 +239,5 @@
 <script>
     AOS.init();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
