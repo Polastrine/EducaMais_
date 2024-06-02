@@ -134,7 +134,7 @@ function plotarDados() {
     const box_seguidores = document.getElementById('boxSeguidoresPlotados');
     const box_pontuacaoTotal = document.getElementById('boxPontuacaoPlotada');
 
-    box_nomeUsuario.innerHTML = `${nomeUsuarioNav}`;
+    box_nomeUsuario.innerHTML = `<b>${nomeUsuarioNav}<b>`;
     span_nomeUsuario.innerHTML = `${nomeUsuario}`;
     span_emailUsuario.innerHTML = `${emailUsuario}`;
     span_dataCriacaoUsuario.innerHTML = `${dataCriacaoEditada}`;
@@ -883,3 +883,94 @@ function exibirRanking(graficoBarras2) {
 }
 
 
+
+
+mostrarPublicacoes()
+
+function publicar() {
+    const descricao = document.querySelector('.caixaTexto2').value;
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch('/publicacao/publicar', {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ descricao: descricao, idUsuario: idUsuario })
+    })
+    .then(response => {
+        if (response.ok) {
+            mostrarPublicacoes();
+            document.querySelector('.caixaTexto2').value = '';
+        } else {
+            console.log("Erro ao publicar.");
+        }
+    })
+    .catch(error => {
+        console.log(error.message);
+    });
+}
+
+function mostrarPublicacoes() {
+    fetch('/publicacao/mostrarPublicacao', {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.log("Erro ao buscar publicações.");
+        }
+    })
+    .then(json => {
+        const boxPosts = document.querySelector('.boxPosts');
+        boxPosts.innerHTML = '';
+
+        json.forEach(publicacao => {
+            const isOwner = publicacao.fkUsuario == sessionStorage.ID_USUARIO;
+            boxPosts.innerHTML += `
+                <div class="publicacao">
+                    <div class="publicacaoText">
+                        <p>${publicacao.publicacao}</p>
+                    </div>
+                    <div class="publicacaoBtn">
+                        <div class="nomeCriador"><p>${publicacao.nomeCriador}</p></div>
+                        ${!isOwner ? '<div class="btn_seguir" onclick="seguir()"> <img src="./assets/plataforma/seguir.png"></div>' : ''}
+                        ${isOwner ? `<div class="btn_remover" onclick="deletar(${publicacao.idPublicacao})"><h3>X</h3></div>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+    })
+    .catch(error => {
+        console.log(error.message);
+    });
+}
+
+function deletar(idPublicacao) {
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch(`/publicacao/deletar/${idPublicacao}`, {
+        credentials: 'include',
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ idUsuario: idUsuario })
+    })
+    .then(response => {
+        if (response.ok) {
+            mostrarPublicacoes();
+        } else {
+            console.log("Erro ao deletar publicação.");
+        }
+    })
+    .catch(error => {
+        console.log(error.message);
+    });
+}

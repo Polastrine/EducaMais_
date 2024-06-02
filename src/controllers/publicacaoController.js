@@ -1,136 +1,54 @@
-const publicacaoModel = require("../models/publicacaoModel");
-
-function listar(req, res) {
-    publicacaoModel.listar().then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
-function listarPorUsuario(req, res) {
-    const idUsuario = req.params.idUsuario;
-
-    publicacaoModel.listarPorUsuario(idUsuario)
-        .then(
-            function (resultado) {
-                if (resultado.length > 0) {
-                    res.status(200).json(resultado);
-                } else {
-                    res.status(204).send("Nenhum resultado encontrado!");
-                }
-            }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log(
-                    "Houve um erro ao buscar os avisos: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
-
-function pesquisarDescricao(req, res) {
-    const descricao = req.params.descricao;
-
-    publicacaoModel.pesquisarDescricao(descricao)
-        .then(
-            function (resultado) {
-                if (resultado.length > 0) {
-                    res.status(200).json(resultado);
-                } else {
-                    res.status(204).send("Nenhum resultado encontrado!");
-                }
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
+var publicacaoModel = require("../models/publicacaoModel");
 
 function publicar(req, res) {
-    const titulo = req.body.titulo;
-    const descricao = req.body.descricao;
-    const idUsuario = req.params.idUsuario;
+    var descricao = req.body.descricao;
+    var idUsuario = req.body.idUsuario;
 
-    if (titulo == undefined) {
-        res.status(400).send("O título está indefinido!");
-    } else if (descricao == undefined) {
-        res.status(400).send("A descrição está indefinido!");
-    } else if (idUsuario == undefined) {
-        res.status(403).send("O id do usuário está indefinido!");
+    if (descricao == undefined || idUsuario == undefined) {
+        res.status(400).send("Descrição ou ID do usuário está indefinido!");
     } else {
-        publicacaoModel.publicar(titulo, descricao, idUsuario)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            )
-            .catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
+        publicacaoModel.publicar(descricao, idUsuario)
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                res.status(500).json(erro.sqlMessage);
+            });
     }
 }
 
-function editar(req, res) {
-    const novaDescricao = req.body.descricao;
-    const idAviso = req.params.idAviso;
-
-    publicacaoModel.editar(novaDescricao, idAviso)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-
+function mostrarPublicacao(req, res) {
+    publicacaoModel.mostrarPublicacao()
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function deletar(req, res) {
-    const idAviso = req.params.idAviso;
+    var idPublicacao = req.params.idPublicacao;
+    var idUsuario = req.body.idUsuario; // Assuming the user ID is sent in the request body for verification
 
-    publicacaoModel.deletar(idAviso)
-        .then(
-            function (resultado) {
+    if (idPublicacao == undefined || idUsuario == undefined) {
+        res.status(400).send("ID da publicação ou ID do usuário está indefinido!");
+    } else {
+        publicacaoModel.deletar(idPublicacao, idUsuario)
+            .then(function (resultado) {
                 res.json(resultado);
-            }
-        )
-        .catch(
-            function (erro) {
+            })
+            .catch(function (erro) {
                 console.log(erro);
-                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
-            }
-        );
+            });
+    }
 }
 
 module.exports = {
-    listar,
-    listarPorUsuario,
-    pesquisarDescricao,
     publicar,
-    editar,
+    mostrarPublicacao,
     deletar
-}
+};

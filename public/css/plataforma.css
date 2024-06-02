@@ -87,6 +87,10 @@ body {
     align-items: center;
 }
 
+.forumIcon{
+    width: 28px;
+}
+
 .boxButtons {
     margin-top: 10px;
     display: flex;
@@ -585,6 +589,109 @@ body {
     background-color: #242424bd;
     border: 3px solid #311934;
     margin: 20px auto 0;
+    padding: 20px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boxPosts::-webkit-scrollbar {
+    width: 2px; 
+}
+
+.boxPosts::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+/* Estilizando o "polegar" da barra de rolagem */
+.boxPosts::-webkit-scrollbar-thumb {
+    background: rgb(0, 187, 255); 
+    border-radius: 10px; 
+}
+
+.publicacao{
+    width: 700px;
+    height: 180px;
+    background-color: rgba(255, 255, 255, 0.35); 
+    border-radius: 10px;  
+    border: 3px solid #00a2ff; 
+    margin-bottom: 20px;
+}
+
+.publicacaoText{
+    width: 100%;
+    height: 145px;
+    padding: 10px;
+}
+
+.publicacaoText p{
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.publicacaoBtn{
+    width: 100%;
+    height: 35px;
+    background-color: #00a2ff;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.publicacaoBtn .nomeCriador{
+    height: 80%;
+    width: 250px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.publicacaoBtn p{
+    font-weight: bold;
+}
+
+.publicacaoBtn .btn_seguir{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.publicacaoBtn .btn_seguir:hover{
+    transform: scale(1.1);
+    background-color: #ff75af;
+    transition: 0.5s;
+}
+
+
+.publicacaoBtn .btn_remover{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    left: 400px;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.publicacaoBtn .btn_remover:hover{
+    transform: scale(1.1);
+    background-color: #ff75af;
+    transition: 0.5s;
 }
 
 .caixaTexto2{
