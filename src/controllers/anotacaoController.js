@@ -18,6 +18,7 @@ function inserirAnotacao(req, res) {
     }
 }
 
+
 function listarAnotacoes(req, res) {
     var idUsuario = req.params.idUsuarioServer; 
 

@@ -29,7 +29,7 @@ function obterDadosUsuario(idUsuario) {
         SELECT 
             (SELECT COUNT(idResultado) FROM resultado JOIN usuario ON resultado.fkUsuario = usuario.idUsuario WHERE fkUsuario = ${idUsuario}) AS jogosFeitos,
             (SELECT COUNT(idPublicacao) FROM publicacao JOIN usuario ON publicacao.fkUsuario = usuario.idUsuario WHERE fkUsuario = ${idUsuario}) AS publicacoes,
-            (SELECT COUNT(fkSeguindo) FROM seguidores JOIN usuario ON seguidores.fkSeguidor = usuario.idUsuario WHERE fkSeguindo = ${idUsuario}) AS seguidores,
+            (SELECT COUNT(fkSeguido) FROM seguidores JOIN usuario ON seguidores.fkSeguidor = usuario.idUsuario WHERE fkSeguido = ${idUsuario}) AS seguidores,
             (SELECT SUM(pontuacao) FROM resultado JOIN usuario ON resultado.fkUsuario = usuario.idUsuario WHERE fkUsuario = ${idUsuario}) AS pontuacaoTotal
     `;
 

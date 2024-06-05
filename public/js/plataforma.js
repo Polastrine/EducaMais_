@@ -920,9 +920,9 @@ function mostrarPublicacoes() {
             "Content-Type": "application/json"
         }
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
+    .then(resposta => {
+        if (resposta.ok) {
+            return resposta.json();
         } else {
             console.log("Erro ao buscar publicações.");
         }

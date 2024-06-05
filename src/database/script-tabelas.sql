@@ -1,18 +1,26 @@
--- Arquivo base do script feito no MySQL e quais foram as entidades criadas:
-
 CREATE DATABASE educaMais;
 
-USE educaMais;
+USE educaMais; 
 
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
-    senha CHAR(15) NOT NULL,
-    dataCriacao TIMESTAMP,
-    jogosFeitos INT DEFAULT 0,
-    pontuacaoTotal INT DEFAULT 0
+    senha VARCHAR(45) NOT NULL,
+    dataCriacao DATE
 );
+
+CREATE TABLE seguidores (
+	idSeguidores INT,
+    fkSeguidor INT,
+    fkSeguido INT,
+    CONSTRAINT chkAssociativa PRIMARY KEY (idSeguidores,fkSeguidor,fkSeguido),
+    CONSTRAINT chkSeguidoresSeguidor FOREIGN KEY (fkSeguidor)
+		REFERENCES usuario(idUsuario),
+	CONSTRAINT chkSeguidoresSeguindo FOREIGN KEY (fkSeguido)
+		REFERENCES usuario(idUsuario)
+);
+
 
 CREATE TABLE anotacao (
 	idAnotacao INT PRIMARY KEY AUTO_INCREMENT,
@@ -23,45 +31,18 @@ CREATE TABLE anotacao (
 );
 
 CREATE TABLE publicacao (
-	idPublicao INT PRIMARY KEY AUTO_INCREMENT,
+	idPublicacao INT PRIMARY KEY AUTO_INCREMENT,
     publicacao VARCHAR(280),
     fkUsuario INT,
     CONSTRAINT chkPublicacaoUsuario FOREIGN KEY (fkUsuario)
 		REFERENCES usuario(idUsuario)
 );
 
+
 CREATE TABLE resultado (
 	idResultado INT PRIMARY KEY AUTO_INCREMENT,
-    pontuacao INT,
+    pontuacao INT DEFAULT 0,
     fkUsuario INT,
     CONSTRAINT chkResultadoUsuario FOREIGN KEY (fkUsuario)
-		REFERENCES usuario(idUsuario)
-);
-
-CREATE TABLE pergunta (
-	idPergunta INT PRIMARY KEY AUTO_INCREMENT,
-	textoPergunta VARCHAR(100)
-);
-
-CREATE TABLE alternativa (
-	idAlternativa INT PRIMARY KEY AUTO_INCREMENT,
-    textoAlternativa VARCHAR(25),
-    correta BOOLEAN,
-    fkPergunta INT,
-    CONSTRAINT chkAlternativaPergunta FOREIGN KEY (fkPergunta)
-		REFERENCES pergunta(idPergunta)
-);
-
-CREATE TABLE resposta (
-	idResposta INT PRIMARY KEY AUTO_INCREMENT,
-    resposta VARCHAR(25),
-    fkPergunta INT,
-    fkAlternativa INT,
-    fkUsuario INT,
-    CONSTRAINT chkRespostaPergunta FOREIGN KEY (fkPergunta)
-		REFERENCES pergunta(idPergunta),
-    CONSTRAINT chkRespostaAlternativa FOREIGN KEY (fkAlternativa)
-		REFERENCES alternativa(idAlternativa),
-    CONSTRAINT chkRespostaUsuario FOREIGN KEY (fkUsuario)
 		REFERENCES usuario(idUsuario)
 );
