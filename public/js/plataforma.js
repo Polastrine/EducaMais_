@@ -1,3 +1,4 @@
+// ANIMÇÕES DE TROCA DOS DISPLAYS:                                   ----------------------------------------------------------------------
 function acessarHome(){
     const interfaceBox = document.querySelector('.interfaceBox1');
     const interfaceBox2 = document.querySelector('.interfaceBox2');
@@ -148,6 +149,9 @@ function plotarDados() {
 }
 
 
+
+
+// FUNÇÕES RELATIVAS AO QUIZ:                             --------------------------------------------------------------------
 
 let listaPerguntas = [
     {
@@ -624,6 +628,9 @@ function reiniciarQuiz(){
 
 
 
+// FUNÇÕES REFERENTES ÀS ANOTAÇÕES PESSOAIS:
+
+
 function inserirAnotacao() {
     const idUsuario = sessionStorage.ID_USUARIO;
     const anotacaoTexto = document.getElementById('caixaTexto').value;
@@ -653,7 +660,6 @@ function inserirAnotacao() {
 
 
 
-
 function listarAnotacoes() {
     const idUsuario = sessionStorage.ID_USUARIO;
 
@@ -679,8 +685,8 @@ function listarAnotacoes() {
             json.forEach(anotacao => {
                 anotacoesSalvas.innerHTML += `
                     <div class="anotacaoSalvada">
-                        <h2 class="anotacaoTexto">${anotacao.Ordem}º Anotação </h2>
-                        <div onclick='deletarAnotacao(${anotacao.Ordem})' class="btn_removerAnotacao"><h1>X</h1></div>
+                        <h2 onclick='obterAnotacao(${idUsuario}, ${anotacao.Ordem})' class="anotacaoTexto">${anotacao.Ordem}º Anotação </h2>
+                        <div onclick='deletarAnotacao(${idUsuario}, ${anotacao.Ordem})' class="btn_removerAnotacao"><h1>X</h1></div>
                     </div>
                 `;
             });
@@ -691,10 +697,54 @@ function listarAnotacoes() {
     });
 }
 
+function obterAnotacao(idUsuario, ordem) {
+    fetch(`/anotacao/obterAnotacao/${idUsuario}/${ordem}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                console.log("Erro ao obter anotação.");
+            }
+        })
+        .then(function (json) {
+            exibirAnotacao(json);
+        })
+        .catch(function (erro) {
+            console.error("Erro:", erro);
+        });
+}
 
-function deletarAnotacao(ordem) {
-    const idUsuario = sessionStorage.ID_USUARIO;
+function exibirAnotacao(anotacao) {
+    let anotacaoText = document.querySelector(".anotacaoText");
 
+    anotacaoText.innerHTML = `${anotacao.anotacao}`;
+
+    abrirAnotacao();
+}
+
+function abrirAnotacao() {
+    let modal = document.querySelector(".boxAnotacao");
+    let desfoque = document.querySelector(".boxDesfoque");
+    
+    desfoque.style.visibility = 'visible';
+    desfoque.style.opacity = '1';
+    
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '1';
+}
+
+function fecharAnotacao() {
+    let modal = document.querySelector(".boxAnotacao");
+    let desfoque = document.querySelector(".boxDesfoque");
+
+    desfoque.style.opacity = '0';
+    desfoque.style.visibility = 'hidden';
+    
+    modal.style.opacity = '0';
+    modal.style.visibility = 'hidden';
+}
+
+function deletarAnotacao(idUsuario, ordem) {
     fetch(`/anotacao/deletarAnotacao/${idUsuario}/${ordem}`, {
         credentials: 'include',
         method: "DELETE",
@@ -714,6 +764,11 @@ function deletarAnotacao(ordem) {
         console.log(erro.message);
     });
 }
+
+
+
+
+// FUNÇÕES RELATIVAS AOS GŔAFICOS E AOS SEUS DADOS:                            --------------------------------------------------------------------
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -762,7 +817,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     fetch('/grafico/obterDadosGraficos')
-        .then(response => response.json())
+        .then(resposta => resposta.json())
         .then(data => {
             graficoBarras1.data.datasets[0].data = [
                 data.jogadoresAtivos,
@@ -781,6 +836,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.error('Erro ao buscar dados do gráfico:', error);
         });
 });
+
+
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const ctx2 = document.getElementById('myChart2').getContext('2d');
@@ -829,6 +887,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     exibirRanking(graficoBarras2);
 });
+
+
 
 
 function exibirRanking(graficoBarras2) {
@@ -885,6 +945,9 @@ function exibirRanking(graficoBarras2) {
 
 
 
+
+// FUNÇÕES REFERENTES AO FÓRUM:                                     --------------------------------------------------------------------
+
 mostrarPublicacoes()
 
 function publicar() {
@@ -911,6 +974,8 @@ function publicar() {
         console.log(error.message);
     });
 }
+
+
 
 function mostrarPublicacoes() {
     fetch('/publicacao/mostrarPublicacao', {
@@ -951,6 +1016,9 @@ function mostrarPublicacoes() {
         console.log(error.message);
     });
 }
+
+
+
 
 function deletar(idPublicacao) {
     const idUsuario = sessionStorage.ID_USUARIO;

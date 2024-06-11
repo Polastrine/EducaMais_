@@ -11,13 +11,13 @@ router.get("/listarAnotacoes/:idUsuarioServer", function(req, res) {
     anotacaoController.listarAnotacoes(req, res); 
 });
 
-router.delete("/deletarAnotacao/:idUsuario/:ordemDesejada", function(req, res) {
-    var idUsuario = req.params.idUsuario; 
-    var ordemDesejada = req.params.ordemDesejada; 
-    anotacaoController.deletarAnotacao(idUsuario, ordemDesejada, res); 
+router.delete("/deletarAnotacao/:idUsuario/:ordem", function(req, res) {
+    anotacaoController.deletarAnotacao(req, res); 
 });
 
 
-
+router.get("/obterAnotacao/:idUsuario/:ordem", function (req, res) {
+    anotacaoController.obterAnotacao(req, res);
+});
 
 module.exports = router;

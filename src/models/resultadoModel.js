@@ -10,6 +10,7 @@ function salvarPontuacao(pontuacao, idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+
 function exibirRanking() {
     var instrucaoSql = `
         SELECT 

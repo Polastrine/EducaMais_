@@ -35,8 +35,11 @@ function listarAnotacoes(req, res) {
 
 
 
-function deletarAnotacao(idUsuario, ordemDesejada, res) {
-    anotacaoModel.deletarAnotacao(idUsuario, ordemDesejada)
+function deletarAnotacao(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var ordem = req.params.ordem;
+
+    anotacaoModel.deletarAnotacao(idUsuario, ordem)
         .then(function () {
             res.status(200).send("Anotação deletada com sucesso.");
         })
@@ -48,9 +51,30 @@ function deletarAnotacao(idUsuario, ordemDesejada, res) {
 
 
 
+function obterAnotacao(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var ordem = req.params.ordem;
+
+    anotacaoModel.obterAnotacao(idUsuario, ordem)
+        .then(function (resultado) {
+            if (resultado.length == 0) {
+                res.status(204).send("Nenhuma anotação encontrada");
+            } else {
+                res.status(200).json(resultado[0]);
+            }
+        })
+        .catch(function (erro) {
+            console.error("Erro ao obter anotação:", erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+
 
 module.exports = {
     inserirAnotacao,
     listarAnotacoes,
-    deletarAnotacao
+    deletarAnotacao,
+    obterAnotacao
 }
