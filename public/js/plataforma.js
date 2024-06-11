@@ -1,5 +1,6 @@
 // ANIMÇÕES DE TROCA DOS DISPLAYS:                                   ----------------------------------------------------------------------
-function acessarHome(){
+
+function acessarHome() {
     const interfaceBox = document.querySelector('.interfaceBox1');
     const interfaceBox2 = document.querySelector('.interfaceBox2');
     const interfaceBox3 = document.querySelector('.interfaceBox3');
@@ -8,7 +9,7 @@ function acessarHome(){
     const displayToggle2 = document.querySelector('.displayToggle2');
     const displayToggle3 = document.querySelector('.displayToggle3');
     const displayToggle4 = document.querySelector('.displayToggle4');
-    
+
     displayToggle.style.animation = 'opacity 0.8s ease-in-out'
 
     displayToggle.style.display = 'block'
@@ -25,7 +26,7 @@ function acessarHome(){
 }
 
 
-function acessarForum(){
+function acessarForum() {
     const interfaceBox = document.querySelector('.interfaceBox1');
     const interfaceBox2 = document.querySelector('.interfaceBox2');
     const interfaceBox3 = document.querySelector('.interfaceBox3');
@@ -34,9 +35,9 @@ function acessarForum(){
     const displayToggle2 = document.querySelector('.displayToggle2');
     const displayToggle3 = document.querySelector('.displayToggle3');
     const displayToggle4 = document.querySelector('.displayToggle4');
-    
+
     displayToggle2.style.animation = 'opacity 0.8s ease-in-out'
-    
+
     displayToggle.style.display = 'none'
     displayToggle2.style.display = 'block'
     displayToggle3.style.display = 'none'
@@ -50,7 +51,7 @@ function acessarForum(){
 }
 
 
-function acessarQuiz(){
+function acessarQuiz() {
     const interfaceBox = document.querySelector('.interfaceBox1');
     const interfaceBox2 = document.querySelector('.interfaceBox2');
     const interfaceBox3 = document.querySelector('.interfaceBox3');
@@ -59,7 +60,7 @@ function acessarQuiz(){
     const displayToggle2 = document.querySelector('.displayToggle2');
     const displayToggle3 = document.querySelector('.displayToggle3');
     const displayToggle4 = document.querySelector('.displayToggle4');
-    
+
     displayToggle3.style.animation = 'opacity 0.8s ease-in-out'
 
     displayToggle.style.display = 'none'
@@ -75,7 +76,7 @@ function acessarQuiz(){
 }
 
 
-function acessarEstatisticas(){
+function acessarEstatisticas() {
     const interfaceBox = document.querySelector('.interfaceBox1');
     const interfaceBox2 = document.querySelector('.interfaceBox2');
     const interfaceBox3 = document.querySelector('.interfaceBox3');
@@ -86,7 +87,7 @@ function acessarEstatisticas(){
     const displayToggle4 = document.querySelector('.displayToggle4');
 
     displayToggle4.style.animation = 'opacity 0.8s ease-in-out'
-    
+
 
     displayToggle.style.display = 'none'
     displayToggle2.style.display = 'none'
@@ -98,21 +99,24 @@ function acessarEstatisticas(){
     interfaceBox2.style.display = 'none'
     interfaceBox3.style.display = 'none'
     interfaceBox4.style.display = 'block'
+
+    exibirRanking()
 }
 
 
-function voltarHome(){
+function voltarHome() {
     window.location.href = '../index.html'
 }
 
 
+
 function plotarDados() {
+    let idUsuario = sessionStorage.ID_USUARIO;
     let nomeUsuario = sessionStorage.NOME_USUARIO;
     let emailUsuario = sessionStorage.EMAIL_USUARIO;
     let dataCriacao = sessionStorage.DATA_CRIACAO;
     let jogosFeitos = sessionStorage.JOGOS_FEITOS;
     let qntdPublicacoes = sessionStorage.PUBLICACOES;
-    let qntdSeguidores = sessionStorage.SEGUIDORES;
     let pontuacaoTotal = sessionStorage.PONTUACAO_TOTAL;
     let nomeUsuarioNav = '';
     let dataCriacaoEditada = dataCriacao.slice(0, 10);
@@ -120,9 +124,9 @@ function plotarDados() {
     for (let posicaoLetra = 0; posicaoLetra < nomeUsuario.length; posicaoLetra++) {
         let letra = nomeUsuario[posicaoLetra];
         if (letra != ' ') {
-            nomeUsuarioNav += letra
+            nomeUsuarioNav += letra;
         } else {
-            break
+            break;
         }
     }
 
@@ -132,21 +136,44 @@ function plotarDados() {
     const span_dataCriacaoUsuario = document.getElementById('boxDataPlotada');
     const box_jogosFeitos = document.getElementById('boxJogosPlotados');
     const box_publicacoes = document.getElementById('boxPublicacoesPlotadas');
-    const box_seguidores = document.getElementById('boxSeguidoresPlotados');
     const box_pontuacaoTotal = document.getElementById('boxPontuacaoPlotada');
+    const box_rankingAtual = document.getElementById('boxRankingPlotado');
 
-    box_nomeUsuario.innerHTML = `<b>${nomeUsuarioNav}<b>`;
+    // FETCH PARA OBTENÇÃO DA POSIÇÃO DO USUÁRIO NO RANKING
+    // FETCH PARA OBTENÇÃO DA POSIÇÃO DO USUÁRIO NO RANKING
+    fetch(`/resultado/exibirPosicaoUsuario/${idUsuario}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            console.log('Erro ao obter posição do usuário no ranking');
+        })
+        .then(data => { 
+            const posicaoUsuario = data.posicao; 
+            if (posicaoUsuario !== undefined) {
+                box_rankingAtual.innerHTML = `${posicaoUsuario}º`;
+            } else {
+                console.log('Não encontrada!');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+
+
+
+    box_nomeUsuario.innerHTML = `<b>${nomeUsuarioNav}</b>`;
     span_nomeUsuario.innerHTML = `${nomeUsuario}`;
     span_emailUsuario.innerHTML = `${emailUsuario}`;
     span_dataCriacaoUsuario.innerHTML = `${dataCriacaoEditada}`;
     box_jogosFeitos.innerHTML = `${jogosFeitos}`;
     box_publicacoes.innerHTML = `${qntdPublicacoes}`;
-    box_seguidores.innerHTML = `${qntdSeguidores}`;
-    if(pontuacaoTotal == 'null'){
+    if (pontuacaoTotal == 'null') {
         pontuacaoTotal = 0;
     }
     box_pontuacaoTotal.innerHTML = `${pontuacaoTotal}`;
 }
+
 
 
 
@@ -156,12 +183,12 @@ function plotarDados() {
 let listaPerguntas = [
     {
         id: 1,
-        pergunta: 'Qual foi a primeira aeronave fabricada pela Embraer?',
+        pergunta: 'Qual é o principal componente que mantém uma aeronave voando?',
         respostas: {
-            a: 'Embraer 110 Bandeirante',
-            b: 'Embraer 120 Brasília',
-            c: 'Embraer 190',
-            d: 'Embraer E-Jet'
+            a: 'Asa',
+            b: 'Motor',
+            c: 'Fuselagem',
+            d: 'Roda' 
         },
         respostaCorreta: 'a'
     },
@@ -189,12 +216,12 @@ let listaPerguntas = [
     },
     {
         id: 4,
-        pergunta: 'Qual linguagem de programação é conhecida por sua simplicidade e uso em aprendizado?',
+        pergunta: 'O que é o ângulo de estol?',
         respostas: {
-            a: 'C++',
-            b: 'Java',
-            c: 'Python',
-            d: 'Assembly'
+            a: 'Ângulo da Roda',
+            b: 'Ângulo de Visão Periférica',
+            c: 'Ângulo Crítico de Inclinação',
+            d: 'Ângulo de Manobragem'
         },
         respostaCorreta: 'c'
     },
@@ -211,14 +238,14 @@ let listaPerguntas = [
     },
     {
         id: 6,
-        pergunta: 'Qual desses aviões foi desenvolvido para substituir o Embraer EMB-120 Brasília?',
+        pergunta: 'Qual é a velocidade mínima necessária para que uma aeronave possa sustentar voo?',
         respostas: {
-            a: 'Embraer ERJ 145',
-            b: 'Embraer E-Jet',
-            c: 'Embraer EMB-110 Bandeirante',
-            d: 'Embraer KC-390'
+            a: 'Velocidade do som',
+            b: 'Velocidade de cruzeiro',
+            c: 'Velocidade de decolagem',
+            d: 'Velocidade de estol'
         },
-        respostaCorreta: 'a'
+        respostaCorreta: 'd'
     },
     {
         id: 7,
@@ -244,12 +271,12 @@ let listaPerguntas = [
     },
     {
         id: 9,
-        pergunta: 'Qual é o algoritmo de ordenação mais simples?',
+        pergunta: 'Qual é o menor país do mundo?',
         respostas: {
-            a: 'Merge Sort',
-            b: 'Quick Sort',
-            c: 'Bubble Sort',
-            d: 'Heap Sort'
+            a: 'Mônaco',
+            b: 'Nauru',
+            c: 'Vaticano',
+            d: 'San Marino'
         },
         respostaCorreta: 'c'
     },
@@ -266,14 +293,14 @@ let listaPerguntas = [
     },
     {
         id: 11,
-        pergunta: 'O que é um loop infinito?',
+        pergunta: 'Quem inventou a lâmpada?',
         respostas: {
-            a: 'Um loop que nunca termina',
-            b: 'Um loop que termina imediatamente',
-            c: 'Um loop que ocorre uma vez',
-            d: 'Um loop que depende de uma condição externa'
+            a: 'Graham Bell',
+            b: 'Steve Jobs',
+            c: 'Thomas Edison',
+            d: 'Henry Ford'
         },
-        respostaCorreta: 'a'
+        respostaCorreta: 'c'
     },
     {
         id: 12,
@@ -288,23 +315,23 @@ let listaPerguntas = [
     },
     {
         id: 13,
-        pergunta: 'Quem foi o primeiro brasileiro a pilotar um avião?',
+        pergunta: 'Em que ano foi usado um celular pela primeira vez no Brasil?',
         respostas: {
-            a: 'Alberto Santos-Dumont',
-            b: 'Rolim Amaro',
-            c: 'Edu Chaves',
-            d: 'Octávio Pinto'
+            a: '1900',
+            b: '1990',
+            c: '1890',
+            d: '2000'
         },
-        respostaCorreta: 'a'
+        respostaCorreta: 'b'
     },
     {
         id: 14,
-        pergunta: 'Qual é a função de um compilador em programação?',
+        pergunta: 'Que grande evento histórico aconteceu em 1822 no Brasil?',
         respostas: {
-            a: 'Executar o código',
-            b: 'Escrever o código',
-            c: 'Converter código fonte em código executável',
-            d: 'Testar o código'
+            a: 'Descobrimento do Brasil',
+            b: 'Ditadura Militar',
+            c: 'Independência do Brasil',
+            d: 'Construção de Brasília'
         },
         respostaCorreta: 'c'
     },
@@ -332,12 +359,12 @@ let listaPerguntas = [
     },
     {
         id: 17,
-        pergunta: 'O que significa a sigla SQL?',
+        pergunta: 'Qual foi o primeiro computador do mundo?',
         respostas: {
-            a: 'Structured Query Language',
-            b: 'Simple Query Language',
-            c: 'Sequential Query Language',
-            d: 'Standard Query Language'
+            a: 'ENIAC',
+            b: 'Macintosh',
+            c: 'Apple II',
+            d: 'Ibook'
         },
         respostaCorreta: 'a'
     },
@@ -346,11 +373,11 @@ let listaPerguntas = [
         pergunta: 'Qual é a principal vantagem de usar o framework React?',
         respostas: {
             a: 'Melhor performance em processamento de dados',
-            b: 'Facilidade de manutenção de código e reusabilidade de componentes',
-            c: 'Maior segurança na aplicação',
+            b: 'Maior segurança na aplicação',
+            c: 'Facilidade de manutenção de código e reusabilidade de componentes',
             d: 'Compatibilidade com todas as linguagens de programação'
         },
-        respostaCorreta: 'b'
+        respostaCorreta: 'c'
     },
     {
         id: 19,
@@ -365,36 +392,36 @@ let listaPerguntas = [
     },
     {
         id: 20,
-        pergunta: 'Qual é a complexidade do algoritmo de busca binária?',
+        pergunta: 'Qual alternativa não é um eixo de um avião?',
         respostas: {
-            a: 'O(n)',
-            b: 'O(n log n)',
-            c: 'O(log n)',
-            d: 'O(1)'
+            a: 'Lateral',
+            b: 'Rotacional',
+            c: 'Longitudinal',
+            d: 'Vertical'
         },
-        respostaCorreta: 'c'
+        respostaCorreta: 'b'
     },
     {
         id: 21,
-        pergunta: 'Qual é o objetivo do teste unitário?',
+        pergunta: 'De quem é a famosa frase “Penso, logo existo”?',
         respostas: {
-            a: 'Testar a aplicação como um todo',
-            b: 'Testar unidades individuais de código',
-            c: 'Testar a performance do sistema',
-            d: 'Testar a interface do usuário'
+            a: 'Platão',
+            b: 'Sócrates',
+            c: 'Galileu Galilei',
+            d: 'Descartes'
         },
-        respostaCorreta: 'b'
+        respostaCorreta: 'd'
     },
     {
         id: 22,
-        pergunta: 'Qual destas é uma aeronave de carga desenvolvida pela Embraer?',
+        pergunta: 'Quantas casas decimais tem o número pi?',
         respostas: {
-            a: 'Embraer E195-E2',
-            b: 'Embraer KC-390',
-            c: 'Embraer Phenom 300',
-            d: 'Embraer Legacy 650'
+            a: 'Infinitas',
+            b: 'Centenas',
+            c: 'Duas',
+            d: 'Vinte'
         },
-        respostaCorreta: 'b'
+        respostaCorreta: 'a'
     },
     {
         id: 23,
@@ -431,12 +458,12 @@ let listaPerguntas = [
     },
     {
         id: 26,
-        pergunta: 'Qual linguagem de programação é amplamente usada para desenvolvimento de aplicativos Android?',
+        pergunta: '“It is six twenty" ou "twenty past six”. Que horas são em inglês?',
         respostas: {
-            a: 'Swift',
-            b: 'Python',
-            c: 'Java',
-            d: 'Ruby'
+            a: '12:06',
+            b: '6:02',
+            c: '6:20',
+            d: '12:20'
         },
         respostaCorreta: 'c'
     },
@@ -464,12 +491,12 @@ let listaPerguntas = [
     },
     {
         id: 29,
-        pergunta: 'Qual dessas aeronaves é utilizada para transporte executivo?',
+        pergunta: 'De qual dirigível o Brasil tem um hangar?',
         respostas: {
-            a: 'Embraer Phenom 100',
-            b: 'Embraer KC-390',
-            c: 'Embraer EMB 314 Super Tucano',
-            d: 'Embraer E195-E2'
+            a: 'Zeppelin',
+            b: 'Hindenburg',
+            c: 'Bodensee',
+            d: 'LZ-7'
         },
         respostaCorreta: 'a'
     },
@@ -555,22 +582,22 @@ function verificarResposta() {
             } else {
                 alternativa.style.backgroundColor = '#f7677d'; // Vermelho para erradas não selecionadas
             }
-        }); 
+        });
 
         if (respostaCorreta == respostaSelecionada) {
             pontuacao++;
         }
 
         posicao++;
-        if(posicao < 10){
+        if (posicao < 10) {
             setTimeout(() => exibirPergunta(posicao), 2000);
-        } else{
+        } else {
             setTimeout(() => finalizarQuiz(pontuacao), 3000);
         }
     }
 }
 
-function finalizarQuiz(){
+function finalizarQuiz() {
     const quizInterface2 = document.querySelector('.quizInicio2');
     const quizInterface3 = document.querySelector('.quizInicio3');
 
@@ -590,30 +617,30 @@ function finalizarQuiz(){
             idUsuario: sessionStorage.ID_USUARIO
         })
     })
-    .then(function(resposta) {
-        if (resposta.ok) {
-            return resposta.json();
-        } else {
-            console.log("Erro ao salvar pontuação.");
-        }
-    })
-    .then(function (json) {
-        if (json) {
-            // Atualizar os dados do usuário no sessionStorage
-            sessionStorage.JOGOS_FEITOS = json.jogosFeitos;
-            sessionStorage.PONTUACAO_TOTAL = json.pontuacaoTotal;
+        .then(function (resposta) {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                console.log("Erro ao salvar pontuação.");
+            }
+        })
+        .then(function (json) {
+            if (json) {
+                // Atualizar os dados do usuário no sessionStorage
+                sessionStorage.JOGOS_FEITOS = json.jogosFeitos;
+                sessionStorage.PONTUACAO_TOTAL = json.pontuacaoTotal;
 
-            setTimeout(() => reiniciarQuiz(), 3000);
-        }
-    })
-    .catch(function (erro) {
-        console.log(erro.message);
-        mostrarAlerta(erro.message);
-    });
+                setTimeout(() => reiniciarQuiz(), 3000);
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro.message);
+            mostrarAlerta(erro.message);
+        });
 }
 
 
-function reiniciarQuiz(){
+function reiniciarQuiz() {
     const quizInterface1 = document.querySelector('.quizInicio1')
     const quizInterface3 = document.querySelector('.quizInicio3');
 
@@ -625,6 +652,8 @@ function reiniciarQuiz(){
     pontuacao = 0;
     perguntasAleatorias = listaPerguntas.sort(() => Math.random() - 0.5).slice(0, 10); // Reembaralhando perguntas
 }
+
+
 
 
 
@@ -646,56 +675,56 @@ function inserirAnotacao() {
             idUsuarioServer: idUsuario
         })
     })
-    .then(function (resposta) {
-        if (resposta.ok) {
-            listarAnotacoes(); // Atualiza a lista de anotações após inserir
-        } else {
-            console.log("Houve um erro ao tentar inserir a anotação.");
-        }
-    })
-    .catch(function (erro) {
-        console.log(erro.message);
-    });
+        .then(function (resposta) {
+            if (resposta.ok) {
+                listarAnotacoes(); // Atualiza a lista de anotações após inserir
+            } else {
+                console.log("Houve um erro ao tentar inserir a anotação.");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro.message);
+        });
 }
-
 
 
 function listarAnotacoes() {
     const idUsuario = sessionStorage.ID_USUARIO;
 
-    fetch(`/anotacao/listarAnotacoes/${idUsuario}`, { 
+    fetch(`/anotacao/listarAnotacoes/${idUsuario}`, {
         credentials: 'include',
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
     })
-    .then(function (resposta) {
-        if (resposta.ok) {
-            return resposta.json();
-        } else {
-            console.log("Houve um erro ao tentar listar as anotações.");
-        }
-    })
-    .then(function (json) {
-        if (json) {
-            const anotacoesSalvas = document.getElementById('anotacoesSalvas');
-            anotacoesSalvas.innerHTML = ''; 
+        .then(function (resposta) {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                console.log("Houve um erro ao tentar listar as anotações.");
+            }
+        })
+        .then(function (json) {
+            if (json) {
+                const anotacoesSalvas = document.getElementById('anotacoesSalvas');
+                anotacoesSalvas.innerHTML = '';
 
-            json.forEach(anotacao => {
-                anotacoesSalvas.innerHTML += `
+                json.forEach(anotacao => {
+                    anotacoesSalvas.innerHTML += `
                     <div class="anotacaoSalvada">
                         <h2 onclick='obterAnotacao(${idUsuario}, ${anotacao.Ordem})' class="anotacaoTexto">${anotacao.Ordem}º Anotação </h2>
                         <div onclick='deletarAnotacao(${idUsuario}, ${anotacao.Ordem})' class="btn_removerAnotacao"><h1>X</h1></div>
                     </div>
                 `;
-            });
-        }
-    })
-    .catch(function (erro) {
-        console.log(erro.message);
-    });
+                });
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro.message);
+        });
 }
+
 
 function obterAnotacao(idUsuario, ordem) {
     fetch(`/anotacao/obterAnotacao/${idUsuario}/${ordem}`)
@@ -714,6 +743,7 @@ function obterAnotacao(idUsuario, ordem) {
         });
 }
 
+
 function exibirAnotacao(anotacao) {
     let anotacaoText = document.querySelector(".anotacaoText");
 
@@ -722,16 +752,18 @@ function exibirAnotacao(anotacao) {
     abrirAnotacao();
 }
 
+
 function abrirAnotacao() {
     let modal = document.querySelector(".boxAnotacao");
     let desfoque = document.querySelector(".boxDesfoque");
-    
+
     desfoque.style.visibility = 'visible';
     desfoque.style.opacity = '1';
-    
+
     modal.style.visibility = 'visible';
     modal.style.opacity = '1';
 }
+
 
 function fecharAnotacao() {
     let modal = document.querySelector(".boxAnotacao");
@@ -739,10 +771,11 @@ function fecharAnotacao() {
 
     desfoque.style.opacity = '0';
     desfoque.style.visibility = 'hidden';
-    
+
     modal.style.opacity = '0';
     modal.style.visibility = 'hidden';
 }
+
 
 function deletarAnotacao(idUsuario, ordem) {
     fetch(`/anotacao/deletarAnotacao/${idUsuario}/${ordem}`, {
@@ -752,18 +785,19 @@ function deletarAnotacao(idUsuario, ordem) {
             "Content-Type": "application/json"
         }
     })
-    .then(function (resposta) {
-        if (resposta.ok) {
-            console.log("Anotação deletada com sucesso.");
-            listarAnotacoes();
-        } else {
-            console.log("Houve um erro ao tentar deletar a anotação.");
-        }
-    })
-    .catch(function (erro) {
-        console.log(erro.message);
-    });
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("Anotação deletada com sucesso.");
+                listarAnotacoes();
+            } else {
+                console.log("Houve um erro ao tentar deletar a anotação.");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro.message);
+        });
 }
+
 
 
 
@@ -838,8 +872,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-
-
 document.addEventListener('DOMContentLoaded', (event) => {
     const ctx2 = document.getElementById('myChart2').getContext('2d');
 
@@ -850,8 +882,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             datasets: [{
                 label: 'Pontuação',
                 data: [],
-                backgroundColor: 'rgb(0, 187, 255)', 
-                borderColor: '#ffffff', 
+                backgroundColor: 'rgb(0, 187, 255)',
+                borderColor: '#ffffff',
                 borderWidth: 3
             }]
         },
@@ -859,7 +891,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             plugins: {
                 legend: {
                     labels: {
-                        color: '#ffffff' 
+                        color: '#ffffff'
                     }
                 }
             },
@@ -867,18 +899,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        color: '#ffffff', 
+                        color: '#ffffff',
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.2)' 
+                        color: 'rgba(255, 255, 255, 0.2)'
                     }
                 },
                 x: {
                     ticks: {
-                        color: '#ffffff', 
+                        color: '#ffffff',
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.2)' 
+                        color: 'rgba(255, 255, 255, 0.2)'
                     }
                 }
             }
@@ -889,57 +921,55 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-
-
 function exibirRanking(graficoBarras2) {
-    fetch(`/resultado/exibirRanking`, { 
+    fetch(`/resultado/exibirRanking`, {
         credentials: 'include',
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
     })
-    .then(function (resposta) {
-        if (resposta.ok) {
-            return resposta.json();
-        } else {
-            console.log("Houve um erro ao tentar listar o ranking.");
-        }
-    })
-    .then(function (json) {
-        if (json) {
-            const boxRanking = document.getElementById('ranks');
-            boxRanking.innerHTML = ''; 
+        .then(function (resposta) {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                console.log("Houve um erro ao tentar listar o ranking.");
+            }
+        })
+        .then(function (json) {
+            if (json) {
+                const boxRanking = document.getElementById('ranks');
+                boxRanking.innerHTML = '';
 
-            let labels = [];
-            let data = [];
+                let labels = [];
+                let data = [];
 
-            json.forEach(usuario => {
-                boxRanking.innerHTML += `
+                json.forEach(usuario => {
+                    boxRanking.innerHTML += `
                     <div class="rankItem">
                         <div class="nomeRank">
                             <span class="nomeText"><p>${usuario.Nome}</p></span>
                         </div>
                         <div class="posicaoRank">
-                            <span class="posicaoText"><p>${usuario.Posição}º</p></span>              
+                            <span class="posicaoText"><p>${usuario.Posicao}º</p></span>              
                         </div>
                         <div class="pontuacaoRank">
                             <span class="pontuacaoText"><p>${usuario.PontuacaoTotal}</p></span>
                         </div>
                     </div>
                 `;
-                labels.push(usuario.Nome);
-                data.push(usuario.PontuacaoTotal);
-            });
+                    labels.push(usuario.Nome);
+                    data.push(usuario.PontuacaoTotal);
+                });
 
-            graficoBarras2.data.labels = labels;
-            graficoBarras2.data.datasets[0].data = data;
-            graficoBarras2.update();
-        }
-    })
-    .catch(function (erro) {
-        console.log(erro.message);
-    });
+                graficoBarras2.data.labels = labels;
+                graficoBarras2.data.datasets[0].data = data;
+                graficoBarras2.update();
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro.message);
+        });
 }
 
 
@@ -962,19 +992,18 @@ function publicar() {
         },
         body: JSON.stringify({ descricao: descricao, idUsuario: idUsuario })
     })
-    .then(response => {
-        if (response.ok) {
-            mostrarPublicacoes();
-            document.querySelector('.caixaTexto2').value = '';
-        } else {
-            console.log("Erro ao publicar.");
-        }
-    })
-    .catch(error => {
-        console.log(error.message);
-    });
+        .then(response => {
+            if (response.ok) {
+                mostrarPublicacoes();
+                document.querySelector('.caixaTexto2').value = '';
+            } else {
+                console.log("Erro ao publicar.");
+            }
+        })
+        .catch(error => {
+            console.log(error.message);
+        });
 }
-
 
 
 function mostrarPublicacoes() {
@@ -985,20 +1014,20 @@ function mostrarPublicacoes() {
             "Content-Type": "application/json"
         }
     })
-    .then(resposta => {
-        if (resposta.ok) {
-            return resposta.json();
-        } else {
-            console.log("Erro ao buscar publicações.");
-        }
-    })
-    .then(json => {
-        const boxPosts = document.querySelector('.boxPosts');
-        boxPosts.innerHTML = '';
+        .then(resposta => {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                console.log("Erro ao buscar publicações.");
+            }
+        })
+        .then(json => {
+            const boxPosts = document.querySelector('.boxPosts');
+            boxPosts.innerHTML = '';
 
-        json.forEach(publicacao => {
-            const isOwner = publicacao.fkUsuario == sessionStorage.ID_USUARIO;
-            boxPosts.innerHTML += `
+            json.forEach(publicacao => {
+                const isOwner = publicacao.fkUsuario == sessionStorage.ID_USUARIO;
+                boxPosts.innerHTML += `
                 <div class="publicacao">
                     <div class="publicacaoText">
                         <p>${publicacao.publicacao}</p>
@@ -1010,14 +1039,12 @@ function mostrarPublicacoes() {
                     </div>
                 </div>
             `;
+            });
+        })
+        .catch(error => {
+            console.log(error.message);
         });
-    })
-    .catch(error => {
-        console.log(error.message);
-    });
 }
-
-
 
 
 function deletar(idPublicacao) {
@@ -1031,14 +1058,14 @@ function deletar(idPublicacao) {
         },
         body: JSON.stringify({ idUsuario: idUsuario })
     })
-    .then(response => {
-        if (response.ok) {
-            mostrarPublicacoes();
-        } else {
-            console.log("Erro ao deletar publicação.");
-        }
-    })
-    .catch(error => {
-        console.log(error.message);
-    });
+        .then(response => {
+            if (response.ok) {
+                mostrarPublicacoes();
+            } else {
+                console.log("Erro ao deletar publicação.");
+            }
+        })
+        .catch(error => {
+            console.log(error.message);
+        });
 }

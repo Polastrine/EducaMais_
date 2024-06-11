@@ -17,7 +17,7 @@ CREATE TABLE seguidores (
     CONSTRAINT chkAssociativa PRIMARY KEY (idSeguidores,fkSeguidor,fkSeguido),
     CONSTRAINT chkSeguidoresSeguidor FOREIGN KEY (fkSeguidor)
 		REFERENCES usuario(idUsuario),
-	CONSTRAINT chkSeguidoresSeguindo FOREIGN KEY (fkSeguido)
+	CONSTRAINT chkSeguidoresSeguido FOREIGN KEY (fkSeguido)
 		REFERENCES usuario(idUsuario)
 );
 

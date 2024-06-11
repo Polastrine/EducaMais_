@@ -13,14 +13,30 @@ function salvarPontuacao(pontuacao, idUsuario) {
 
 function exibirRanking() {
     var instrucaoSql = `
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY SUM(resultado.pontuacao) DESC) AS Posição,
-            usuario.nome AS Nome,
-            SUM(resultado.pontuacao) AS PontuacaoTotal
-        FROM usuario 
-        JOIN resultado ON usuario.idUsuario = resultado.fkUsuario
-        GROUP BY usuario.idUsuario, usuario.nome
-        ORDER BY 'Pontuação Total' DESC;
+            SELECT 
+                ROW_NUMBER() OVER (ORDER BY SUM(resultado.pontuacao) DESC) AS Posicao,
+                usuario.nome AS Nome,
+                SUM(resultado.pontuacao) AS PontuacaoTotal
+            FROM usuario 
+            JOIN resultado ON usuario.idUsuario = resultado.fkUsuario
+            GROUP BY usuario.idUsuario, usuario.nome
+            ORDER BY PontuacaoTotal DESC;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+function exibirPosicaoUsuario(idUsuario) {
+    var instrucaoSql = `
+        SELECT Posicao
+        FROM (SELECT ROW_NUMBER() OVER (ORDER BY SUM(resultado.pontuacao) DESC) AS Posicao,
+        usuario.idUsuario FROM usuario JOIN resultado 
+        ON usuario.idUsuario = resultado.fkUsuario
+            GROUP BY usuario.idUsuario
+            ORDER BY SUM(resultado.pontuacao) DESC
+        ) AS Ranking
+        WHERE idUsuario = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -29,5 +45,6 @@ function exibirRanking() {
 
 module.exports = {
     salvarPontuacao,
-    exibirRanking
+    exibirRanking,
+    exibirPosicaoUsuario
 }

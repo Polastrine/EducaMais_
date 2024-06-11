@@ -1,6 +1,7 @@
 const resultadoModel = require('../models/resultadoModel');
 const usuarioModel = require('../models/usuarioModel');
 
+
 function salvarPontuacao(req, res) {
     let pontuacao = req.body.pontuacao;
     let idUsuario = req.body.idUsuario;
@@ -27,7 +28,6 @@ function salvarPontuacao(req, res) {
 }
 
 
-
 function exibirRanking(req, res) {
     resultadoModel.exibirRanking()
         .then(function (resultado) {
@@ -44,8 +44,27 @@ function exibirRanking(req, res) {
 }
 
 
+function exibirPosicaoUsuario(req, res) {
+    const idUsuario = req.params.idUsuario;
+    resultadoModel.exibirPosicaoUsuario(idUsuario)
+        .then(function (resultado) {
+            if (resultado.length > 0) { 
+                const posicaoUsuario = resultado[0].Posicao; 
+                console.log(`Posição do usuário no controller: ${posicaoUsuario}`);
+                res.status(200).json({ posicao: posicaoUsuario });
+            } else {
+                res.status(404).send("Posição do usuário não encontrada.");
+            }
+        })
+        .catch(function (erro) {
+            console.log("Houve um erro ao buscar a posição do usuário: ", erro);
+            res.status(500).json(erro.message);
+        });
+}
+
 
 module.exports = {
     salvarPontuacao,
-    exibirRanking
+    exibirRanking,
+    exibirPosicaoUsuario
 };

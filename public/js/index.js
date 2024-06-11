@@ -1,8 +1,8 @@
 
+// Animação do menu da NavBar (Uso da biblioteca anime)
+var aberto = false;
 
-var aberto=false;
-
-function abrir() { 
+function abrir() {
 	anime({
 		targets: '.symbol',
 		duration: 100,
@@ -29,15 +29,16 @@ function abrir() {
 		duration: 100,
 		opacity: 0
 	});
-	aberto=true;
+	aberto = true;
 };
-function fechar() { 
-  anime({
-        targets: '.menu',
-        easing: 'linear',
-        translateX: ['-100%', '0'], // Movendo o menu para fora da tela à esquerda
-        duration: 300
-    });
+
+function fechar() {
+	anime({
+		targets: '.menu',
+		easing: 'linear',
+		translateX: ['-100%', '0'], // Movendo o menu para fora da tela à esquerda
+		duration: 300
+	});
 	anime({
 		targets: '.symbol',
 		duration: 300,
@@ -61,49 +62,50 @@ function fechar() {
 		targets: '.mid',
 		easing: 'linear',
 		height: '3px',
-    opacity: '100%',
+		opacity: '100%',
 		duration: 300
 	});
-    document.querySelector('.symbol').innerHTML = `<object onclick="menu()" class='hamburguer'>
+	document.querySelector('.symbol').innerHTML = `<object onclick="menu()" class='hamburguer'>
     <object class="element top"></object>
     <object class="element mid"></object>
     <object class="element bottom"></object>
 </object>`
-	aberto=false;
-    document.querySelector('.lista').style.display = 'none';
-    document.querySelector('.lista').style.flexDirection = 'row';
-    document.querySelector('.button').style.display = 'none';
+	aberto = false;
+	document.querySelector('.lista').style.display = 'none';
+	document.querySelector('.lista').style.flexDirection = 'row';
+	document.querySelector('.button').style.display = 'none';
 };
 
-function expandir(){
-    anime({
-        targets:'.menu',
-        easing: 'linear',
-        width: '1300px',
-        height: '65px',
-        borderRadius: '50px',
-        translateX: ['0', '-90%'], // Expandir da direita para a esquerda
-        duration:300
-    });
-
-    document.querySelector('.symbol').innerHTML = `<img onclick="menu()" id="botaoSair" style="width:20px; position:relative; bottom:22px;" src="./assets/botaoSairNav.png">`
-    document.querySelector('.lista').style.display = 'flex';
-    document.querySelector('.button').style.display = 'block';
-  
-}
-function diminuir(){
+function expandir() {
 	anime({
-		targets:'.menu',
+		targets: '.menu',
+		easing: 'linear',
+		width: '1300px',
+		height: '65px',
+		borderRadius: '50px',
+		translateX: ['0', '-90%'], // Expandir da direita para a esquerda
+		duration: 300
+	});
+
+	document.querySelector('.symbol').innerHTML = `<img onclick="menu()" id="botaoSair" style="width:20px; position:relative; bottom:22px;" src="./assets/botaoSairNav.png">`
+	document.querySelector('.lista').style.display = 'flex';
+	document.querySelector('.button').style.display = 'block';
+
+}
+
+function diminuir() {
+	anime({
+		targets: '.menu',
 		easing: 'linear',
 		height: '65px',
 		width: '65px',
 		borderRadius: '50px',
-		duration:300
+		duration: 300
 	});
 }
 
-function menu(){
-	if(aberto){
+function menu() {
+	if (aberto) {
 		fechar();
 		diminuir();
 	} else {
@@ -114,55 +116,55 @@ function menu(){
 
 
 
-function telaLogin(){
-    window.location.href="./login.html"
+// Botões da NavBar:
+function telaLogin() {
+	window.location.href = "./login.html"
 }
 
-
-
-
-function scrollHome(){
+function scrollHome() {
 	const telaCards = document.getElementById('home');
 
-	telaCards.scrollIntoView({behavior: "smooth"})
+	telaCards.scrollIntoView({ behavior: "smooth" })
 	menu()
 }
 
-function scrollPilares(){
+function scrollPilares() {
 	const telaCards = document.getElementById('pilares');
 
-	telaCards.scrollIntoView({behavior: "smooth"})
+	telaCards.scrollIntoView({ behavior: "smooth" })
 	menu()
 }
 
-function scrollHabilidades(){
+function scrollHabilidades() {
 	const telaCards = document.getElementById('habilidades');
 
-	telaCards.scrollIntoView({behavior: "smooth"})
+	telaCards.scrollIntoView({ behavior: "smooth" })
 	menu()
 }
 
-function scrollCuriosidades(){
+function scrollCuriosidades() {
 	const telaCards = document.getElementById('exploracao');
 
-	telaCards.scrollIntoView({behavior: "smooth"})
+	telaCards.scrollIntoView({ behavior: "smooth" })
 	menu()
 }
 
 
-let i = 1;
+
+// Carrossel:
+let contador = 1;
 document.getElementById('radio1').checked = true;
 
-setInterval( function(){
+setInterval(function () {
 	nextImage();
 }, 8000)
 
-function nextImage(){
-	i++;
-	if(i>3){
-		i=1;
+function nextImage() {
+	contador++;
+	if (contador > 3) {
+		contador = 1;
 	}
 
-	document.getElementById('radio'+i).checked = true;
+	document.getElementById('radio' + contador).checked = true;
 }
 

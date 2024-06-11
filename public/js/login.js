@@ -111,7 +111,6 @@ function telaHome(){
 
 
 // Validações do campo:
-
 function cadastrar(){
     let nomeCompleto = inputNome1.value;
     let email = inputEmail2.value;
