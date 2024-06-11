@@ -2,7 +2,7 @@
 
 ## Sobre o Projeto 🚀
 
-![EducaMais Logo](./public/assets/Logo/educa%20mais.png)
+![EducaMais Logo](./public/assets/logoNavBar.png)
 
 E aí, galera! Bem-vindos ao EducaMais! 🌟 Aqui, a educação é a nossa maior aventura e a diversão está garantida! 💡 Vamos explorar juntos o mundo do conhecimento e fazer cada dia mais brilhante! 🚀
 
